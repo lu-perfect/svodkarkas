@@ -1,0 +1,75 @@
+// Layout > Navbar
+//
+
+header .navbar {
+  background: var(--white);
+  position: fixed;
+  top: 0;
+  left: -310px;
+  max-width: 300px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 3px 10px hsla(0, 0%, 0%, 0.3);
+  z-index: 5;
+  padding: 60px 20px;
+  visibility: hidden;
+  transition: 0.15s ease-in;
+
+  &_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--cultured-1);
+    margin-bottom: 25px;
+
+    .logo img { width: 200px; }
+
+    @media (min-width: 1200px) {
+      display: none;
+    }
+  }
+
+  .close-button .icon {
+    font-size: 20px;
+    padding: 5px;
+  }
+
+  &.active {
+    visibility: visible;
+    transform: translateX(310px);
+    transition: 0.25s ease-out;
+  }
+
+  .navbar-link {
+    color: var(--cadet);
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    text-transform: uppercase;
+    padding-block: 15px;
+
+    &:is(:hover, :focus) { color: var(--accent); }
+
+    @media (min-width: 1200px) {
+      color: var(--dark-jungle-green);
+      --fs-5: 1.125rem;
+      text-transform: capitalize;
+    }
+  }
+
+  .navbar-list {
+    @media (min-width: 1200px) {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    &,
+    &.active {
+      all: unset;
+    }
+  }
+}
+

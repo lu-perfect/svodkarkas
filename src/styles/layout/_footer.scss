@@ -1,0 +1,129 @@
+// Components > Footer
+//
+
+.footer {
+  background: var(--dark);
+  color: var(--white);
+
+  .container { padding-inline: 30px; }
+
+  a { color: inherit; }
+}
+
+.footer-top {
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+.footer-brand {
+  .logo { margin-bottom: 15px; }
+}
+
+.section-text {
+  font-size: var(--fs-5);
+  line-height: 1.8;
+  margin-bottom: 30px;
+  max-width: 45ch;
+}
+
+.contact-list {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.contact-list small {
+  font-size: 9px;
+  font-weight: 300;
+}
+
+.contact-link {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  padding-left: 2em;
+
+  .icon {
+    font-size: 18px;
+    position: absolute;
+    left: 0;
+  }
+
+  &:is(address, span) {
+    font-size: var(--fs-5);
+    transition: var(--transition);
+  }
+
+  &:is(:hover, :focus) span { color: var(--orange-soda); }
+}
+
+.social-list {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+.footer-list-title {
+  font-family: var(--ff-montserrat);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-700);
+  margin-bottom: 15px;
+}
+
+.footer-link {
+  font-size: var(--fs-5);
+  padding-block: 10px;
+
+  &:is(:hover, :focus) { color: var(--orange-soda); }
+}
+
+.footer-bottom {
+  background: var(--black);
+  padding-block: 25px;
+}
+
+.copyright {
+  font-size: var(--fs-5);
+  text-align: center;
+
+  a {
+    display: inline-block;
+
+    &:is(:hover, :focus) { color: var(--orange-soda); }
+  }
+}
+
+@media (min-width: 600px) {
+  .footer-link-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer { margin-bottom: 0; }
+}
+
+@media (min-width: 992px) {
+  .footer-top .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer-brand {
+    max-width: 300px;
+    margin-bottom: 0;
+  }
+
+  .footer-link-box { flex-basis: 550px; }
+}
+
+@media (min-width: 1200px) {
+  .footer { --fs-5: 1rem; }
+
+  .footer-link-box { flex-basis: 700px; }
+}

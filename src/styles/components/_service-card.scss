@@ -1,0 +1,56 @@
+// Components > Service Card
+//
+
+.service-card {
+  position: relative;
+  background: var(--white);
+  text-align: center;
+  padding: 40px 30px;
+  box-shadow: var(--shadow-2);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: var(--accent);
+    transition: var(--transition);
+  }
+
+  .card-title {
+    margin-bottom: 15px;
+
+    & > a:is(:hover, :focus) { color: var(--accent); }
+  }
+
+  .card-text {
+    color: var(--cadet);
+    font-size: var(--fs-5);
+    line-height: 1.8;
+    margin-bottom: 25px;
+  }
+
+  .card-link {
+    color: var(--opal);
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .icon-wrapper {
+    width: max-content;
+    margin-inline: auto;
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  &:is(:hover, :focus) {
+    &::after { width: 100%; }
+    .card-link { color: var(--accent); }
+  }
+}

@@ -1,0 +1,252 @@
+// Layout > Header
+//
+
+header {
+  position: relative;
+  z-index: 2000;
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: hsla(0, 0%, 0%, 0.7);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 4;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    @media (min-width: 1200px)  {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    padding-bottom: 106px;
+  }
+}
+
+.header {
+  &_top {
+    background: var(--dark);
+    padding-block: 15px;
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+      gap: 8px 20px;
+    }
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+
+      @media (min-width: 768px) {
+        margin-left: auto;
+      }
+
+      @media (min-width: 992px) {
+        gap: 30px;
+
+        margin-bottom: 0;
+      }
+    }
+
+    .link-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+      gap: 15px;
+      margin-bottom: 5px;
+
+      @media (min-width: 992px) {
+        gap: 30px;
+
+        margin-bottom: 0;
+      }
+    }
+    .link {
+      color: var(--white);
+      font-size: var(--fs-7);
+      font-weight: var(--fw-700);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      &:is(:hover, :focus) { color: var(--accent); }
+
+      .icon {
+        color: var(--accent);
+        font-size: 15px;
+      }
+    }
+
+    .social-link-list {
+      display: flex;
+      align-items: center;
+
+      @media (min-width: 768px) {
+        gap: 12px;
+      }
+    }
+    .social-link {
+      & > svg {
+        color: rgba(255, 255, 255, .65) !important;
+      }
+
+      font-size: 15px;
+
+      @media (min-width: 768px) {
+        font-size: 1rem;
+      }
+
+      &:is(:hover, :focus) {
+        & > svg {
+          color: var(--accent) !important;
+        }
+      }
+    }
+
+    .button {
+      background: var(--accent) !important;
+      color: var(--white) !important;
+      font-size: var(--fs-6);
+      font-weight: var(--fw-700);
+      padding: 4px 12px;
+      border-radius: 8px 0;
+      border: none;
+
+      &:before {
+        content: none;
+      }
+
+      @media (min-width: 768px) {
+        padding: 6px 16px;
+      }
+
+      &:is(:hover, :focus) { --accent: hsl(107, 30%, 40%); }
+    }
+
+    @media (min-width: 768px) {
+      padding-block: 8px;
+    }
+  }
+
+  &_bottom {
+    background: var(--white);
+    padding-block: 25px;
+
+    .logo img { margin-inline: auto; }
+
+    .container {
+      @media (min-width: 768px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+
+  .actions {
+    background: var(--white);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-block: 15px 10px;
+    box-shadow: -2px 0 30px hsla(237, 71%, 52%, 0.2);
+    z-index: 3;
+
+    @media (min-width: 768px) {
+      all: unset;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  .action-button {
+    .icon {
+      color: hsl(0, 0%, 10%);
+      font-size: 20px;
+      margin-inline: auto;
+      margin-bottom: 5px;
+      transition: var(--transition);
+
+      @media (min-width: 768px) {
+        margin-bottom: 0;
+      }
+
+      &:is(:hover, :focus) .icon { color: var(--accent); }
+    }
+
+    .typography {
+      color: var(--cadet);
+      font-family: var(--ff-montserrat);
+      font-size: var(--fs-7);
+      font-weight: var(--fw-500);
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) {
+      background: var(--white);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: var(--shadow-2);
+
+      &:hover {
+        box-shadow: var(--shadow-1);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      &.menu-button {
+        display: none;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    &.active &_bottom {
+      position: fixed;
+      bottom: auto;
+      top: -101.6px;
+      padding-block: 20px;
+      box-shadow: 0 10px 50px hsla(109, 31%, 56%, 0.1);
+      animation: slideDown 0.25s ease-out forwards;
+    }
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}

@@ -9,16 +9,12 @@
 
   gap: 25px;
 
-  .roof,
-  .floors,
-  .price,
-  .area,
+  .w-24,
   .button-wrapper {
     width: calc(25% - 20px);
   }
 
-  .bedrooms,
-  .bathrooms {
+  .w-12 {
     width: calc(25% / 2 - 20px);
   }
 
@@ -31,6 +27,31 @@
 
     padding-top: 15px;
     padding-bottom: 10px;
+
+    .sort {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 12px;
+
+      .icon {
+        transition: all var(--transition);
+        opacity: 0;
+        color: var(--accent);
+
+        transform: rotate(90deg);
+
+        &.asc {
+          transform: rotate(0);
+          opacity: 1;
+        }
+        &.desc {
+          transform: rotate(180deg);
+          opacity: 1;
+        }
+      }
+    }
 
     .button {
       font-weight: var(--fw-600);
@@ -77,4 +98,8 @@
 
   flex-direction: column;
   gap: 12px;
+
+  .typography {
+    display: block;
+  }
 }

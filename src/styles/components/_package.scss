@@ -4,7 +4,7 @@
 .package-header {
   grid-row: 1;
 
-  background-color: rgba(121, 178, 108, .4);
+  background-color: hsl(109, 31%, 82%);
 
   color:  hsl(107, 30%, 40%);
   h3 {
@@ -15,12 +15,83 @@
 
   text-align: center;
   padding: 14px 0;
+
+
+  position: sticky;
+  top: 96px;
+  left: 0;
+  z-index: 501;
 }
 
 .package-row {
   position: relative;
   padding-top: 24px;
   padding-bottom: 8px;
+
+  &.custom {
+    .package-row-title {
+      font-size: 1.5rem;
+      color: var(--accent);
+      text-align: center;
+    }
+    .variant {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      padding-left: 48px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: calc((48px - 20px) / 2);
+        top: calc((1.25rem - 20px) / 2);
+        bottom: 0;
+        width: 20px;
+        height: 20px;
+        border: 1px solid var(--cadet);
+        border-radius: 50%;
+      }
+
+      &:after {
+        opacity: 0;
+        content: "";
+        position: absolute;
+        left: calc((48px - 16px) / 2);
+        top: calc((1.25rem - 16px) / 2);
+        bottom: 0;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        background-color: var(--accent);
+        transition: opacity .2s;
+      }
+
+      &:hover:before,
+      &active:before {
+        border-color: var(--accent);
+      }
+
+      &:hover:after {
+        opacity: .65;
+      }
+
+      &.active:after {
+        opacity: 1;
+      }
+
+      h4 {
+        font-size: 1.125rem;
+        line-height: 1.25rem;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 18px;
+      }
+    }
+  }
 
   .package-row-title {
     font-weight: var(--fw-700);
@@ -87,7 +158,14 @@
   align-items: center;
   flex-direction: column;
 
-  padding: 30px 0 59px;
+  padding: 15px 0;
+  background-color: white;
+  box-shadow: var(--shadow-2);
+
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
 
   .package-footer-title {
     display: inline-block;

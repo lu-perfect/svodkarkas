@@ -1,6 +1,8 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 
 import Layout from 'components/Layout';
+
+import getProjectTags from "utils/getProjectTags";
 
 import OurProjectsSection from "components/Home/sections/OurProjects";
 import TurnKeySection from "components/Home/sections/TurnKey";
@@ -11,11 +13,13 @@ import BlogSection from "components/Home/sections/Blog";
 import HeroSection from 'components/Home/sections/Hero';
 import CTASection from 'components/Home/sections/CTA';
 
-const HomePage: NextPage = () => (
+import { mainProjects } from "data/projects";
+
+const HomePage: NextPage<{ projects: Array<Project> }> = ({ projects }) => (
   <Layout>
     <HeroSection/>
 
-    <OurProjectsSection/>
+    <OurProjectsSection projects={projects} />
 
     <SliderSection/>
 
@@ -30,4 +34,16 @@ const HomePage: NextPage = () => (
     <CTASection />
   </Layout>
 );
+
+
+export const getStaticProps: GetStaticProps = async () => ({
+    props: {
+        projects: mainProjects.map((project) => ({
+            ...project,
+            tags: getProjectTags(project)
+        }))
+    },
+})
+
+
 export default HomePage;

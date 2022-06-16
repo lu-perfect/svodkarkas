@@ -9,7 +9,7 @@ const Nav = () => (
   <nav className="navbar">
     <Box className="navbar_top">
       <Link href="/" className="logo">
-        <img src="/images/logo.png" alt="Логотип компании" />
+        <img src="/images/logo.png" alt="Логотип компании"/>
       </Link>
 
       <Button className="close-button" aria-label="Закрыть Меню">
@@ -19,11 +19,11 @@ const Nav = () => (
 
     <Box className="navbar_bottom">
       <List className="navbar-list">
-        <NavItem href="/projects" caption="Проекты" />
-        <NavItem href="/gallery" caption="Галерея" />
-        <NavItem href="/services" caption="Услуги" />
-        <NavItem href="/credit" caption="Кредит" />
-        <NavItem href="/contacts" caption="Контакты" />
+        <NavItem href="/projects" caption="Проекты"/>
+        <NavItem href="/gallery" caption="Галерея"/>
+        <NavItem href="/services" caption="Услуги"/>
+        <NavItem href="/credit" caption="Кредит"/>
+        <NavItem href="/contacts" caption="Контакты"/>
       </List>
     </Box>
   </nav>

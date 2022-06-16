@@ -6,40 +6,7 @@ import List from "components/UI/List";
 import ProjectCard from "components/cards/Project";
 import AdvancedSearch from "components/AdvancedSearch";
 
-const mockProject = {
-  id: 'shine',
-  title: 'Сияние',
-
-  preview: 'Двухэтажный дом с мансардным вторым этажом и ломаной крышей выполнен в классическом стиле.',
-  description: 'Двухэтажный дом с мансардным вторым этажом и ломаной крышей выполнен в классическом стиле и предлагает все необходимое для комфортного проживания семьи из 3-4 человек.',
-
-  tags: [ 'Современный Стиль', 'Терраса', 'Балкон' ],
-
-  facades: 4,
-  floors: 2,
-
-  isPopular: true,
-  isSale: true,
-
-  price: 8451000,
-
-  bedrooms: 4,
-  bathrooms: 2,
-}
-
-const projects = [
-  mockProject,
-  mockProject,
-  mockProject,
-  mockProject,
-  mockProject,
-  mockProject,
-  mockProject,
-  mockProject,
-  mockProject,
-]
-
-const OurProjectsSection = () => (
+const OurProjectsSection = ({ projects } : { projects: Array<Project> }) => (
   <section className="our-projects">
     <Container>
       <Typography tag="p" className="subtitle">

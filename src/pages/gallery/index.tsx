@@ -5,15 +5,7 @@ import Layout from 'components/Layout';
 import Container from "components/UI/Container";
 import Typography from "components/UI/Typography";
 import Box from "components/UI/Box";
-
-const Slide = ({ url, title } : { url: string, title: string }) => (
-  <figure className="gallery-item">
-    <div className="cover" style={{ backgroundImage: `url(${url});` }} />
-    <figcaption>
-      {title}
-    </figcaption>
-  </figure>
-);
+import Slide from 'components/Slide';
 
 const data = [
   { title: 'Семейный', url: '/images/gallery/1.jpg' },
@@ -104,7 +96,7 @@ const GalleryPage: NextPage = () => {
 
           <Box className="gallery-container">
             {data.map((item, i) => (
-              <Slide key={item.title + i} title={item.title} url={item.url} />
+              <Slide key={item.title + i} url={item.url} />
             ))}
           </Box>
         </Container>

@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import Container from "components/UI/Container";
 import Icon from "components/UI/Icon";
 import Button from "components/UI/Button";
@@ -34,10 +32,6 @@ const HeroSection = () => (
         </Button>
 
       </Wrapper>
-
-      <figure className="hero-banner">
-        <Image src="/images/hero.jpg" width={749} height={562} alt="Коттедж" className="w-100" />
-      </figure>
     </Container>
   </section>
 );

@@ -6,22 +6,29 @@ import Button from "components/UI/Button";
 import Box from "components/UI/Box";
 
 import Slider from "components/Slider";
+import Carousel from "components/Carousel";
 
 const SliderSection = () => (
   <section className="slider-gallery">
     <Container>
       <Typography tag="h2" className="h2 title">
-        Галерея
+        Построенные дома
       </Typography>
 
-      <Slider
-        slides={[
-          '/images/gallery/2.jpg',
-          '/images/gallery/3.jpg',
-          '/images/gallery/4.jpg',
-          '/images/gallery/1.jpg',
-        ]}
-      />
+      <Carousel>
+        <Box>
+          <img src="/images/gallery/2.jpg" alt="" />
+        </Box>
+        <Box>
+          <img src="/images/gallery/3.jpg" alt="" />
+        </Box>
+        <Box>
+          <img src="/images/gallery/4.jpg" alt="" />
+        </Box>
+        <Box>
+          <img src="/images/gallery/1.jpg" alt="" />
+        </Box>
+      </Carousel>
 
       <Box className="button-wrapper">
         <Button variant="slider" onClick={() => Router.push('/gallery')}>

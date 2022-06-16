@@ -43,10 +43,18 @@
     left: 15px;
     right: 15px;
     display: flex;
-    flex-wrap: wrap-reverse;
     align-items: center;
     gap: 15px 10px;
     z-index: 1;
+
+    .tags {
+      align-items: flex-start !important;
+    }
+
+    .card-badge.style {
+      margin-left: auto;
+      background: hsl(0, 0, 29%);
+    }
 
     .action-button {
       color: var(--white);
@@ -55,8 +63,6 @@
       display: flex;
       align-items: flex-end;
       gap: 4px;
-
-      &:first-child { margin-right: auto; }
 
       &:is(:hover, :focus) { color: var(--orange-soda); }
 
@@ -91,8 +97,11 @@
   }
 
   .card-title {
-    --font-weight: var(--fw-600);
     margin-bottom: 15px;
+    font-size: 22px;
+    font-family: var(--ff-montserrat);
+    font-weight: var(--fw-600);
+    color: #414042;
 
     & > a:is(:hover, :focus) { color: var(--orange-soda); }
   }
@@ -106,10 +115,51 @@
   }
 
   .card-text {
-    color: var(--cadet);
+    strong {
+      color: #141414;
+      font-weight: var(--fw-600);
+    }
+
+    font-weight: var(--fw-400);
+    color: #bababa;
     font-size: var(--fs-5);
     line-height: 1.8;
     margin-bottom: 8px;
+  }
+
+  .table-params {
+    width: 100%;
+    margin-bottom: 16px;
+
+    & > .box {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+
+      width: 100%;
+      white-space: nowrap;
+
+      .typography:first-child {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        padding-right: 5px;
+        width: 100%;
+
+        &:after {
+          content: "";
+          position: absolute;
+          right: 5px;
+          bottom: 0;
+          width: 100%;
+          left: 0;
+          height: 1px;
+          z-index: 0;
+          border-bottom: 1px dotted #333;
+        }
+      }
+    }
   }
 
   .card-price {

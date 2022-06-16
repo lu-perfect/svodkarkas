@@ -1,10 +1,10 @@
 export const company = {
-  title: 'Свод-Строй',
+  title: 'Свод-Каркас',
   description: '',
 
-  url: 'https://svod.ru',
+  url: 'https://svodkarkas.ru',
 
-  email: 'svodstroy-k@yandex.ru',
+  email: 'dom@svodkarkas.ru',
   phone: '+ 7 (495) 984-82-74',
   address: 'Ул. Шереметьевская, дом 47, офис 338',
 
@@ -25,7 +25,7 @@ export const company = {
 
   seo: {
     home: {
-      title: 'Свод-Строй',
+      title: 'Свод-Каркас',
       description: '',
     }
   }

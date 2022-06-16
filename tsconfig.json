@@ -19,7 +19,8 @@
     "strictNullChecks": true,
     "alwaysStrict": true,
     "declaration": true,
-    "types": ["node"]
+    "declarationDir": "@types/**/*.d.ts",
+    "types": ["node", "@types/**/*.d.ts"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

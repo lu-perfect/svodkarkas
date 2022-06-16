@@ -5,6 +5,11 @@ section.contacts {
   background: var(--cultured-2);
   padding-block: var(--section-padding);
 
+  display: flex;
+  align-items: center;
+
+  height: calc(100vh - 150.09px);
+
   .row {
     display: flex;
 

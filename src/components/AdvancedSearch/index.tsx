@@ -1,72 +1,79 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import Typography from "components/UI/Typography";
-import Select from "components/UI/Select";
 import Button from "components/UI/Button";
 import Box from "components/UI/Box";
 
+import {
+  areaFilter,
+  areaKey,
+  bathroomsFilter,
+  bedroomsFilter,
+  FilterKey,
+  floorsFilter,
+  priceFilter,
+  priceKey,
+  roofFilter,
+  styleFilter
+} from "data/projects/filters";
+import useProjectSearch from "store/ProjectSearch/hooks";
+import Icon from "components/UI/Icon";
+import List from "components/UI/List";
+import ListItem from "components/UI/ListItem";
+
+const SelectFilter = ({ id, label, width = 24, options } : { id: FilterKey, label: string, width?: 12 | 24, options: Options }) => {
+  const [key, setKey] = useState<string | number>('');
+
+  const { filters, setFilterValue } = useProjectSearch();
+
+  useEffect(() => {
+    setKey(filters[id]);
+  }, [filters, id]);
+
+  return (
+    <Box className={`form-field w-${width}`}>
+      <label>{label}</label>
+      <Box id={`${id}-select`} className="select-box">
+        <fieldset className="current" tabIndex={1}>
+          <Box className="value">
+            <Typography tag="p">{options.find((e) => e.key === key)?.value || 'Все'}</Typography>
+          </Box>
+
+          <Icon viewBox="0 0 1000 1000">
+            <path d="M500,775.4L10,287.2l64.4-62.6L500,650.2l425.6-425.6l64.4,62.6L500,775.4z"/>
+          </Icon>
+        </fieldset>
+        <List>
+          {[{ key: 'all', value: 'Все' }, ...options].map((option) => (
+            <ListItem key={option.key}>
+              <label
+                className={`option${option.key === key ? ' active' : ''}`}
+                htmlFor={option.key.toString()}
+                aria-hidden
+                onClick={() => setFilterValue(id, option.key)}
+              >
+                {option.value}
+              </label>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </Box>
+  );
+}
+
 const AdvancedSearch = () => {
+  const { search, orderByKey, orderAsc, orderBy } = useProjectSearch();
   const [open, setOpen] = useState(false);
 
   return (
     <Box className="advanced-search">
-      <Box className="form-field price">
-        <label>Цена, руб.</label>
-        <Select
-          id="price"
-          options={[
-            { key: 'all', value: 'Все' },
-            { key: '2_3', value: 'от 2 до 3 млн. руб.' },
-            { key: '4_5', value: 'от 4 до 5 млн. руб.' },
-            { key: '5_6', value: 'от 5 до 6 млн. руб.' },
-            { key: '6_7', value: 'от 6 до 7 млн. руб.' },
-            { key: '7+', value: 'от 7 млн. руб.' },
-          ]}
-        />
-      </Box>
-      <Box className="form-field area">
-        <label>Площадь, м².</label>
-        <Select
-          id="area"
-          options={[
-            { key: 'all', value: 'Все' },
-            { key: '<100', value: 'до 100 м²' },
-            { key: '100_150', value: 'от 100 до 150 м²' },
-            { key: '150_200', value: 'от 150 до 200 м²' },
-            { key: '200_250', value: 'от 200 до 250 м²' },
-            { key: '250_300', value: 'от 250 до 300 м²' },
-            { key: '>300', value: 'от 300 м²' },
-          ]}
-        />
-      </Box>
-      <Box className="form-field bedrooms">
-        <label>Спален</label>
-        <Select
-          id="bedrooms"
-          options={[
-            { key: 'all', value: 'Все' },
-            { key: '1', value: '1' },
-            { key: '2', value: '2' },
-            { key: '3', value: '3' },
-            { key: '4', value: '4' },
-          ]}
-        />
-      </Box>
-      <Box className="form-field bathrooms">
-        <label>Санузлов</label>
-        <Select
-          id="bathrooms"
-          options={[
-            { key: 'all', value: 'Все' },
-            { key: '1', value: '1' },
-            { key: '2', value: '2' },
-            { key: '3', value: '3' },
-            { key: '4', value: '4' },
-          ]}
-        />
-      </Box>
+      <SelectFilter {...priceFilter} />
+      <SelectFilter {...areaFilter} />
+      <SelectFilter {...floorsFilter} />
+
       <Box className="button-wrapper">
-        <Button>
+        <Button onClick={search}>
           Подобрать Проект
         </Button>
       </Box>
@@ -76,20 +83,24 @@ const AdvancedSearch = () => {
           Сортировать по
         </Typography>
 
-        <Button>
+        <Button className="sort" onClick={() => {
+          orderByKey(priceKey);
+          search();
+        }}>
           цене
+          <Icon width="24px" height="24px" viewBox="0 0 24 24" className={orderBy === priceKey ? orderAsc ? 'asc' : 'desc' : undefined}>
+            <path fillRule="evenodd" clipRule="evenodd" d="M12.0809 7.28641L12.4345 6.93286L12.788 7.28641L17 11.4984L16.2929 12.2055L12.9345 8.84707V16.9999H11.9345V8.84707L8.57605 12.2055L7.86895 11.4984L12.0809 7.28641Z"/>
+          </Icon>
         </Button>
 
-        <Button>
+        <Button className="sort" onClick={() => {
+          orderByKey(areaKey);
+          search();
+        }}>
           площади
-        </Button>
-
-        <Button>
-          популярности
-        </Button>
-
-        <Button>
-          новизне
+          <Icon width="24px" height="24px" viewBox="0 0 24 24" className={orderBy === areaKey ? orderAsc ? 'asc' : 'desc' : undefined}>
+            <path fillRule="evenodd" clipRule="evenodd" d="M12.0809 7.28641L12.4345 6.93286L12.788 7.28641L17 11.4984L16.2929 12.2055L12.9345 8.84707V16.9999H11.9345V8.84707L8.57605 12.2055L7.86895 11.4984L12.0809 7.28641Z" />
+          </Icon>
         </Button>
 
         <Button className="show-more" onClick={() => setOpen(!open)}>
@@ -100,32 +111,10 @@ const AdvancedSearch = () => {
 
       {open && (
         <>
-          <Box className="form-field floors">
-            <label>Этажность</label>
-            <Select
-              id="floors"
-              options={[
-                { key: 'all', value: 'Все' },
-                { key: '1', value: '1 этаж' },
-                { key: '2', value: '2 этажа' },
-                { key: 'masandra', value: 'с масандрой' },
-              ]}
-            />
-          </Box>
-
-          <Box className="form-field roof">
-            <label>Кровля</label>
-            <Select
-              id="roof"
-              options={[
-                { key: 'all', value: 'Все' },
-                { key: 'hip', value: 'Вальмовая' },
-                { key: 'double', value: 'Двускатная' },
-                { key: 'polyline', value: 'Ломаная' },
-                { key: 'flat', value: 'Плоская' },
-              ]}
-            />
-          </Box>
+          <SelectFilter {...bedroomsFilter} />
+          <SelectFilter {...bathroomsFilter} />
+          <SelectFilter {...roofFilter} />
+          <SelectFilter {...styleFilter} />
         </>
       )}
     </Box>

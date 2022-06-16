@@ -1,33 +1,14 @@
-import {useEffect, useState} from "react";
-import Box from "../../UI/Box";
-import Button from "../../UI/Button";
-import Icon from "../../UI/Icon";
-import Typography from "../../UI/Typography";
-import BunnerActionButton from "./BunnerActionButton";
-import InternalLink from "../../UI/InternalLink";
-import {formatPrice} from "../../../utils/formatPrice";
+import { useState } from "react";
 
-export type Project = {
-  id: string;
+import Box from "components/UI/Box";
+import Icon from "components/UI/Icon";
+import Typography from "components/UI/Typography";
+import InternalLink from "components/UI/InternalLink";
 
-  title: string;
+import BannerActionButton from "./BannerActionButton";
 
-  preview: string;
-  description: string;
-
-  tags: Array<string>;
-
-  facades: number;
-  floors: number;
-
-  isPopular?: boolean;
-  isSale?: boolean;
-
-  price: number;
-
-  bedrooms: number;
-  bathrooms: number;
-};
+import { formatPrice } from "utils/formatPrice";
+import getProjectPrice from "../../../utils/getProjectPrice";
 
 const ProjectCard = ({ project } : { project: Project }) => {
   const [transition, setTransition] = useState(false);
@@ -36,11 +17,11 @@ const ProjectCard = ({ project } : { project: Project }) => {
   function getSrc() {
     let src = `/images/projects/${project.id}`;
 
-    if (slide === 1) {
-      return `${src}/cover.jpg`
+    if (slide <= project.covers) {
+      return `${src}/covers/cover-${slide}.jpg`
     }
 
-    return `${src}/facades/facade-${slide - 1}.jpg`;
+    return `${src}/facades/facade-${slide - project.covers}.jpg`;
   }
 
   function moveNext() {
@@ -61,17 +42,19 @@ const ProjectCard = ({ project } : { project: Project }) => {
   return (
     <Box className="project-card">
       <figure className="card-banner">
-        <Box className="slider-controls">
-          <button aria-label="Предыдущий проект" className="prev" onClick={() => movePrev()} disabled={slide === 1}>
-            <span className="b b1" />
-            <span className="b b2" />
+        {project.covers + project.facades > 1 && (
+          <Box className="slider-controls">
+          <button aria-label="Предыдущий слайд" className="prev" onClick={() => movePrev()} disabled={slide === 1}>
+          <span className="b b1" />
+          <span className="b b2" />
           </button>
 
-          <button aria-label="Следующий проект" className="next" onClick={() => moveNext()} disabled={slide === 1 + project.facades}>
-            <span className="b b1" />
-            <span className="b b2" />
+          <button aria-label="Следующий слайд" className="next" onClick={() => moveNext()} disabled={slide === project.covers + project.facades}>
+          <span className="b b1" />
+          <span className="b b2" />
           </button>
-        </Box>
+          </Box>
+        )}
 
         <InternalLink href={`/projects/${project.id}`}>
           <img src={getSrc()} alt={project.title} className={`w-100${transition ? ' transition' : ''}`} />
@@ -92,17 +75,7 @@ const ProjectCard = ({ project } : { project: Project }) => {
         </Box>
 
         <Box className="banner-actions">
-          <BunnerActionButton
-            label="Тэги"
-            caption={project.tags.join(', ')}
-            icon={(
-              <Icon viewBox="0 0 24 24">
-                <path d="M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z" />
-              </Icon>
-            )}
-          />
-
-          <BunnerActionButton
+          <BannerActionButton
             label="Жилые комнаты"
             caption={project.bedrooms}
             icon={(
@@ -112,7 +85,7 @@ const ProjectCard = ({ project } : { project: Project }) => {
             )}
           />
 
-          <BunnerActionButton
+          <BannerActionButton
             label="Санузлы"
             caption={project.bathrooms}
             icon={(
@@ -122,6 +95,21 @@ const ProjectCard = ({ project } : { project: Project }) => {
               </Icon>
             )}
           />
+
+          <Typography className="card-badge style">
+            {(() => {
+              switch (project.style) {
+                case "barn": return 'Барн';
+                case "chalet": return 'Шале';
+                case "classic": return 'Классический';
+                case "high-tech": return 'High Tech';
+                case "modern": return  'Современный';
+                case "prairies": return  'Прерий';
+                case "scandinavian": return 'Скандинавский';
+                default: throw new Error();
+              }
+            })()}
+          </Typography>
         </Box>
       </figure>
 
@@ -135,14 +123,32 @@ const ProjectCard = ({ project } : { project: Project }) => {
 
           <Box className="card-price">
             <strong>
-              {formatPrice(project.price)}
+              {formatPrice(Math.ceil(getProjectPrice(project, 1) / 1000) * 1000)}
             </strong>
           </Box>
         </Box>
 
-        <Typography tag="p" className="card-text">
-          {project.preview}
-        </Typography>
+        <Box className="table-params">
+          <Box>
+            <Typography>общая площадь</Typography>
+            <Typography>
+              <>
+                {project.area.common} м<sup>2</sup>
+              </>
+            </Typography>
+          </Box>
+          <Box>
+            <Typography>габариты</Typography>
+            <Typography>{project.size.x.toFixed(2)} х {project.size.y.toFixed(2)}</Typography>
+          </Box>
+        </Box>
+
+        {project.tags && project.tags.length > 0 && (
+          <Typography tag="p" className="card-text">
+            <strong>Опции: </strong>
+            {project.tags.join(', ')}
+          </Typography>
+        )}
       </Box>
     </Box>
   );

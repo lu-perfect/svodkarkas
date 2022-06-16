@@ -6,7 +6,7 @@ import Icon from "./Icon";
 import List from "./List";
 import ListItem from "./ListItem";
 
-const Select = ({ id, options } : { id: string, options: Array<{ key: string, value: string }> }) => {
+const Select = ({ id, options } : { id: string, options: Options }) => {
   const [key, setKey] = useState(options[0].key);
 
   return (
@@ -33,9 +33,11 @@ const Select = ({ id, options } : { id: string, options: Array<{ key: string, va
           <ListItem key={option.key}>
             <label
               className={`option${option.key === key ? ' active' : ''}`}
-              htmlFor={option.key}
+              htmlFor={option.key.toString()}
               aria-hidden
-              onClick={() => setKey(option.key)}
+              onClick={() => {
+                setKey(option.key);
+              }}
             >
               {option.value}
             </label>

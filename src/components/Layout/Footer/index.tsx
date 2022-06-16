@@ -20,7 +20,7 @@ const Footer = () => {
             </InternalLink>
 
             <Typography tag="p" className="section-text">
-              Lorem Ipsum is simply dummy text of the and typesetting industry.
+              От проекта до дома вашей мечты.
             </Typography>
 
             <List className="contact-list">

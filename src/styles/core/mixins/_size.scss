@@ -1,0 +1,23 @@
+/// Sizing mixin from width and height
+/// If height is omitted, same as width
+/// @param {Length} $width - element width
+/// @param {Length} $height [$width] - element height
+/// @requires {function} is-length
+
+@mixin size($width, $height: $width) {
+  @if is-length($width) {
+    width: $width;
+  }
+
+  @else {
+    @warn "Invalid length `#{$width}` for `$width` parameter in `size` mixin.";
+  }
+
+  @if is-length($height) {
+    height: $height;
+  }
+
+  @else {
+    @warn "Invalid length `#{$height}` for `$height` parameter in `size` mixin.";
+  }
+}

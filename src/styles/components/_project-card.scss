@@ -4,8 +4,9 @@
 .project-card {
   position: relative;
 
-  border: 1px solid var(--alice-blue);
-  box-shadow: var(--shadow-2);
+  border: 1px solid hsl(210, 100%, 97%);
+  background-color: white;
+  box-shadow: $shadow-2;
 
   &:hover .card-banner img { transform: scale(1.1); }
 
@@ -57,14 +58,14 @@
     }
 
     .action-button {
-      color: var(--white);
-      font-size: var(--fs-6);
+      color: color(white);
+      font-size: $fs-6;
       line-height: 1;
       display: flex;
       align-items: flex-end;
       gap: 4px;
 
-      &:is(:hover, :focus) { color: var(--orange-soda); }
+      &:is(:hover, :focus) { color: color(orange); }
 
       .icon { font-size: 16px; }
     }
@@ -80,30 +81,30 @@
   }
 
   .card-badge {
-    background: var(--black);
-    color: var(--white);
-    font-family: var(--ff-montserrat);
-    font-size: var(--fs-7);
-    font-weight: var(--fw-500);
+    background: color(black);
+    color: color(white);
+    font-family: $base-font-secondary;
+    font-size: $fs-7;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: .045em;
     padding: 4px 10px;
     border-radius: 8px 0;
-    box-shadow: var(--shadow-2);
+    box-shadow: $shadow-2;
 
-    &.green { background: var(--yellow-green); }
+    &.green { background: color(yellow-green); }
 
-    &.orange { background: var(--orange-soda); }
+    &.orange { background: color(orange); }
   }
 
   .card-title {
     margin-bottom: 15px;
     font-size: 22px;
-    font-family: var(--ff-montserrat);
-    font-weight: var(--fw-600);
+    font-family: $base-font-secondary;
+    font-weight: 600;
     color: #414042;
 
-    & > a:is(:hover, :focus) { color: var(--orange-soda); }
+    & > a:is(:hover, :focus) { color: color(orange); }
   }
 
   .card-content {
@@ -117,12 +118,12 @@
   .card-text {
     strong {
       color: #141414;
-      font-weight: var(--fw-600);
+      font-weight: 600;
     }
 
-    font-weight: var(--fw-400);
+    font-weight: 400;
     color: #bababa;
-    font-size: var(--fs-5);
+    font-size: $fs-5;
     line-height: 1.8;
     margin-bottom: 8px;
   }
@@ -163,9 +164,9 @@
   }
 
   .card-price {
-    color: var(--orange-soda);
-    font-family: var(--ff-montserrat);
-    font-size: var(--fs-5);
+    color: color(orange);
+    font-family: $base-font-secondary;
+    font-size: $fs-5;
     margin-bottom: 5px;
   }
 
@@ -175,8 +176,8 @@
   }
 
   .card-price strong {
-    font-size: var(--fs-4);
-    font-weight: var(--fw-600);
+    font-size: $fs-4;
+    font-weight: 600;
   }
 
   .slider-controls {
@@ -187,7 +188,7 @@
     background: #ffffff;
     z-index: 1;
     transform: translateZ(0);
-    box-shadow: var(--shadow-1);
+    box-shadow: $shadow-1;
 
     button {
       position: absolute;

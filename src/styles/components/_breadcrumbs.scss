@@ -1,0 +1,34 @@
+.breadcrumbs {
+  overflow-x: auto;
+  white-space: nowrap;
+
+  .list-item {
+    color: #999;
+    display: inline-block;
+    font-size: $fs-7;
+    vertical-align: top;
+  }
+
+  .list-item > a {
+    text-decoration: underline
+  }
+
+  .list-item > a,
+  .list-item > span {
+    color: #999;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .list-item:not(:last-child):after {
+    content: "/";
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .list-item.active > a,
+  .list-item.active > span {
+    color: #777
+  }
+}

@@ -5,24 +5,30 @@ const project: Project = {
 
   covers: 2,
   facades: 4,
-  floors: 2,
+  floors: 'masandra',
 
   isPopular: false,
   isSale: false,
 
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
-
-  tags: [],
-  style: 'classic',
-
-  size: {
-    x: 0,
-    y: 0
+  area: {
+    common: 258,
+    balcony: 0,
+    terrace: 29,
   },
 
-  bedrooms: 0,
-  bathrooms: 0,
+  roof: {
+    variant: 'gable',
+  },
+
+  tags: ['second-light'],
+  style: 'modern',
+
+  size: {
+    x: 10.1,
+    y: 11.5
+  },
+
+  bedrooms: 4,
+  bathrooms: 2,
 }
 export default project;

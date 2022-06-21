@@ -2,7 +2,9 @@ export default function getProjectTags(project: Project): string[] {
   const tags: string[] = project.tags?.map((tag) => {
     switch (tag) {
       case "duplex": return 'Дуплекс';
+      case "second-light": return 'Второй свет';
       default:
+        alert(tag);
         throw new Error('');
     }
   }) || [];
@@ -22,7 +24,7 @@ export default function getProjectTags(project: Project): string[] {
   if (project.oneFloorElement?.variant === 'bath') {
     tags.push('Баня/Сауна')
   }
-  if (project.roof.variant === 'flat-roof') {
+  if (project.roof.variant === 'flat') {
     tags.push('Плоская крыша')
   }
 

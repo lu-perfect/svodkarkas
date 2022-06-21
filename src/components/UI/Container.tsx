@@ -1,7 +1,11 @@
-import type { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from "react";
+import type { BoxProps } from "./Box";
 
-export const Container = ({ children, className, ...rest } : PropsWithChildren<{ className?: string }> & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => (
-  <div {...rest} className={`container${className ? ` ${className}` : ''}`}>
+export type ContainerProps = BoxProps;
+
+import styles from './Container.module.scss';
+
+export const Container = ({ children, className, ...rest } : ContainerProps) => (
+  <div {...rest} className={`${styles.root}${className ? ` ${className}` : ''}`}>
     {children}
   </div>
 );

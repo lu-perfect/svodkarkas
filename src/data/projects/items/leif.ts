@@ -2,8 +2,6 @@ const project: Project = {
   id: 'leif',
 
   title: 'Лейф',
-  preview: '',
-  description: '',
 
   covers: 1,
   facades: 4,
@@ -12,18 +10,22 @@ const project: Project = {
   isPopular: false,
   isSale: false,
 
-  prices: [0, 0, 0],
+  area: {
+    common: 243.4,
+    balcony: 0,
+    terrace: 36.6,
+  },
 
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
+  roof: {
+    variant: 'hip',
+  },
 
   tags: [],
   style: 'classic',
 
   size: {
-    x: 0,
-    y: 0
+    x: 10,
+    y: 14.2
   },
 
   bedrooms: 0,

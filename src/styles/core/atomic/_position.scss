@@ -1,0 +1,26 @@
+//
+// Position Helper Classes
+/// @require {Boolean} $use-helper-position-styles - global variable in Settings
+/// @see  /Settings/_base-options.scss - All global options
+//
+
+@if $use-helper-position-styles == true {
+  .position {
+
+    &--relative {
+      position: relative;
+    }
+
+    &--absolute {
+      position: absolute;
+    }
+
+    &--static {
+      position: static;
+    }
+
+    &--fixed {
+      position: fixed;
+    }
+  }
+}

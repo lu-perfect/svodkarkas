@@ -1,0 +1,11 @@
+//
+/// @group Selectors
+/// @param {String} $old-context - old selector
+/// @param {String} $new-context - new selector
+//
+
+@mixin context($old-context, $new-context) {
+  @at-root #{selector-replace(&, $old-context, $new-context)} {
+      @content;
+  }
+}

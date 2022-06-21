@@ -1,15 +1,12 @@
-import type { PropsWithChildren, HTMLAttributeAnchorTarget, ForwardedRef } from "react";
-import {forwardRef} from "react";
+import type { DetailedHTMLProps, ForwardedRef, AnchorHTMLAttributes } from "react";
+import { forwardRef } from "react";
 
-export type LinkProps = {
+export type LinkProps = Omit<DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, 'href'> & {
+  innerRef?: ForwardedRef<HTMLAnchorElement>
   href: string;
-  className?: string;
+};
 
-  target?: HTMLAttributeAnchorTarget;
-  rel?: string;
-}
-
-export const Link = ({ innerRef, href, target, rel, children, className } : PropsWithChildren<LinkProps> & { innerRef?: ForwardedRef<HTMLAnchorElement> }) => (
+export const Link = ({ innerRef, href, target, rel, children, className } : LinkProps) => (
   <a
     ref={innerRef}
     href={href}
@@ -19,7 +16,9 @@ export const Link = ({ innerRef, href, target, rel, children, className } : Prop
     {children}
   </a>
 );
-const component = forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>((props, ref) => <Link innerRef={ref} {...props} />);
+const component = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) =>
+  <Link innerRef={ref} {...props} />
+);
 component.displayName = 'Link';
 
 export default component;

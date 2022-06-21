@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 
 import AdvancedSearch from "components/AdvancedSearch";
-import ProjectCard from "components/cards/Project";
+import ProjectCard from "app/projects/ProjectCard";
 
 import Typography from "components/UI/Typography";
 import Container from "components/UI/Container";

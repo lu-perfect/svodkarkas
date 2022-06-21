@@ -20,6 +20,7 @@ import useProjectSearch from "store/ProjectSearch/hooks";
 import Icon from "components/UI/Icon";
 import List from "components/UI/List";
 import ListItem from "components/UI/ListItem";
+import {useRouter} from "next/router";
 
 const SelectFilter = ({ id, label, width = 24, options } : { id: FilterKey, label: string, width?: 12 | 24, options: Options }) => {
   const [key, setKey] = useState<string | number>('');
@@ -65,6 +66,7 @@ const SelectFilter = ({ id, label, width = 24, options } : { id: FilterKey, labe
 const AdvancedSearch = () => {
   const { search, orderByKey, orderAsc, orderBy } = useProjectSearch();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <Box className="advanced-search">
@@ -73,7 +75,10 @@ const AdvancedSearch = () => {
       <SelectFilter {...floorsFilter} />
 
       <Box className="button-wrapper">
-        <Button onClick={search}>
+        <Button onClick={() => {
+          router.push('/projects');
+          search();
+        }}>
           Подобрать Проект
         </Button>
       </Box>
@@ -83,20 +88,14 @@ const AdvancedSearch = () => {
           Сортировать по
         </Typography>
 
-        <Button className="sort" onClick={() => {
-          orderByKey(priceKey);
-          search();
-        }}>
+        <Button className="sort" onClick={() => orderByKey(priceKey)}>
           цене
           <Icon width="24px" height="24px" viewBox="0 0 24 24" className={orderBy === priceKey ? orderAsc ? 'asc' : 'desc' : undefined}>
             <path fillRule="evenodd" clipRule="evenodd" d="M12.0809 7.28641L12.4345 6.93286L12.788 7.28641L17 11.4984L16.2929 12.2055L12.9345 8.84707V16.9999H11.9345V8.84707L8.57605 12.2055L7.86895 11.4984L12.0809 7.28641Z"/>
           </Icon>
         </Button>
 
-        <Button className="sort" onClick={() => {
-          orderByKey(areaKey);
-          search();
-        }}>
+        <Button className="sort" onClick={() => orderByKey(areaKey)}>
           площади
           <Icon width="24px" height="24px" viewBox="0 0 24 24" className={orderBy === areaKey ? orderAsc ? 'asc' : 'desc' : undefined}>
             <path fillRule="evenodd" clipRule="evenodd" d="M12.0809 7.28641L12.4345 6.93286L12.788 7.28641L17 11.4984L16.2929 12.2055L12.9345 8.84707V16.9999H11.9345V8.84707L8.57605 12.2055L7.86895 11.4984L12.0809 7.28641Z" />

@@ -1,38 +1,20 @@
-import { useEffect, useRef } from "react";
-
 import Box from "components/UI/Box";
 
 import TopSection from "./sections/Top";
 import BottomSection from "./sections/Bottom";
 
-const Header = () => {
-  const ref = useRef<HTMLElement>(null);
+export type HeaderProps = {
+  isFixed: boolean;
+}
 
-  function handleScroll() {
-    if (window.scrollY >= 400) {
-      ref.current?.classList.add("active");
-    } else {
-      ref.current?.classList.remove("active");
-    }
-  }
+const Header = ({ isFixed } : HeaderProps) => (
+  <header className={`header${isFixed ? ' active' : ''}`}>
+    <Box className="overlay"/>
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    <TopSection/>
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [])
-
-  return (
-    <header className="header" ref={ref}>
-      <Box className="overlay" />
-
-      <TopSection />
-
-      <BottomSection />
-    </header>
-  );
-};
+    <BottomSection/>
+  </header>
+);
 
 export default Header;

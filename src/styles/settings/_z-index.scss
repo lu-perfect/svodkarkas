@@ -1,0 +1,21 @@
+//
+// z-index variables map
+/// @group infinite-map
+/// @access public
+/// @type Map
+/// @see {function} z @alias z-index - helper functions to get z-index value
+/// @example z(cap,first-cap) @return {Number} // 1
+/// @example z-index(footer) @return {Number} // 3
+//
+
+$z-index-map: (
+  main: (),
+  cap: (
+    first-cap: (),
+  	second-cap: ()
+  ),
+  footer: (),
+  burger-menu: (),
+  header: (),
+  hamburger: ()
+);

@@ -5,6 +5,7 @@
   margin-bottom: 30px;
 
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 
   gap: 25px;
@@ -12,10 +13,16 @@
   .w-24,
   .button-wrapper {
     width: calc(25% - 20px);
+    @media (max-width: 992px) {
+      width: 100%;
+    }
   }
 
   .w-12 {
     width: calc(25% / 2 - 20px);
+    @media (max-width: 992px) {
+      width: calc(50% - 12.5px);
+    }
   }
 
   .bottom-filters {
@@ -36,9 +43,9 @@
       gap: 12px;
 
       .icon {
-        transition: all var(--transition);
+        transition: all $transition;
         opacity: 0;
-        color: var(--accent);
+        color: color(brand, main);
 
         transform: rotate(90deg);
 
@@ -54,14 +61,14 @@
     }
 
     .button {
-      font-weight: var(--fw-600);
-      color: var(--accent);
+      font-weight: 600;
+      color: color(brand, main);
     }
 
     .show-more {
       margin-left: auto;
 
-      border-bottom: 2px dashed var(--accent);
+      border-bottom: 2px dashed color(brand, main);
     }
   }
 
@@ -70,10 +77,10 @@
     align-items: flex-end;
 
     .button {
-      background: var(--accent);
-      color: var(--white);
-      font-size: var(--fs-5);
-      font-weight: var(--fw-700);
+      background: color(brand, main);
+      color: color(white);
+      font-size: $fs-5;
+      font-weight: 700;
 
       line-height: 1;
       height: 44.7px;
@@ -85,7 +92,15 @@
 
       border-radius: 8px 0;
 
-      &:is(:hover, :focus) { --accent:  hsl(107, 30%, 40%); }
+      @media (max-width: 768px) {
+        width: 100%;
+        max-width: 75%;
+        margin: 0 auto;
+      }
+
+      &:is(:hover, :focus) {
+        background: color(brand, dark);
+      }
 
       &:before {
         content: none;

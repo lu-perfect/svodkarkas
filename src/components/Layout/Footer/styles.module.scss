@@ -1,0 +1,82 @@
+// Footer
+//
+
+.footer {
+  background: color(dark);
+  color: color(white);
+
+  padding-top: 60px;
+  padding-bottom: 30px;
+
+  @media (max-width: 992px) {
+    text-align: center;
+  }
+
+  a {
+    color: inherit;
+
+    transition: color .25s ease;
+
+    &:is(:hover, :focus) {
+      color: color(orange);
+    }
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-inline: 30px;
+
+    @media (max-width: 992px) {
+      display: block;
+      justify-content: initial;
+    }
+  }
+
+  &__brand {
+    max-width: 300px;
+
+    @media (max-width: 992px) {
+      max-width: 100%;
+    }
+
+    &-logo {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    &-tagline {
+      font-size: $fs-5;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 45ch;
+
+      @media (max-width: 992px) {
+        max-width: 100%;
+      }
+    }
+
+  }
+
+
+
+  &__widgets {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 700px;
+
+    @media (max-width: 992px) {
+      flex-basis: 550px;
+      flex-wrap: wrap;
+    }
+
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+}

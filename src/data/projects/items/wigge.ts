@@ -2,8 +2,6 @@ const project: Project = {
   id: 'wigge',
 
   title: 'Вигге',
-  preview: '',
-  description: '',
 
   covers: 2,
   facades: 4,
@@ -12,21 +10,25 @@ const project: Project = {
   isPopular: false,
   isSale: false,
 
-  prices: [0, 0, 0],
-
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
-
-  tags: [],
-  style: 'classic',
-
-  size: {
-    x: 0,
-    y: 0
+  area: {
+    common: 165.3,
+    terrace: 23.7,
+    balcony: 0,
   },
 
-  bedrooms: 0,
-  bathrooms: 0,
+  roof: {
+    variant: 'gable',
+  },
+
+  tags: [],
+  style: 'scandinavian',
+
+  size: {
+    x: 8.5,
+    y: 10.5
+  },
+
+  bedrooms: 4,
+  bathrooms: 2,
 }
 export default project;

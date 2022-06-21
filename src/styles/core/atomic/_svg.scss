@@ -1,0 +1,21 @@
+.svg {
+	&--twitter {
+		fill: color(social, twitter);
+	}
+
+	&--facebook {
+		fill: color(social, facebook);
+	}
+
+	&--googleplus {
+		fill: color(social, googleplus);
+	}
+
+	&--instagram {
+		fill: color(social, instagram);
+	}
+
+	&--linkedin {
+		fill: color(social, linkedin);
+	}
+}

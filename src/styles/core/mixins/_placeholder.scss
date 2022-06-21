@@ -1,0 +1,12 @@
+//
+/// @group Selectors
+/// @content [Write the style you want to apply to the placeholder, and it will be added within the @content directive]
+/// @example placeholder { color : rebeccapurple }
+//
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}

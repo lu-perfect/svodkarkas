@@ -1,0 +1,14 @@
+//
+// Margin Helper Classes
+/// @require {Boolean} $use-global-grid - global variable in Settings
+/// @see  /Settings/_widgets.scss - All global options - All global options
+//
+
+@if $use-base-grid == true {
+
+  .grid {
+    width: 85%;
+  	margin: 0 auto;
+  }
+
+}

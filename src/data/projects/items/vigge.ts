@@ -2,8 +2,6 @@ const project: Project = {
   id: 'vigge',
 
   title: 'Вигге',
-  preview: '',
-  description: '',
 
   covers: 1,
   facades: 4,
@@ -12,21 +10,25 @@ const project: Project = {
   isPopular: false,
   isSale: false,
 
-  prices: [0, 0, 0],
-
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
-
-  tags: [],
-  style: 'classic',
-
-  size: {
-    x: 0,
-    y: 0
+  area: {
+    common: 241.8,
+    balcony: 0,
+    terrace: 17.3,
   },
 
-  bedrooms: 0,
-  bathrooms: 0,
+  roof: {
+    variant: 'gable'
+  },
+
+  tags: [],
+  style: 'barn',
+
+  size: {
+    x: 11,
+    y: 14.3
+  },
+
+  bedrooms: 3,
+  bathrooms: 3,
 }
 export default project;

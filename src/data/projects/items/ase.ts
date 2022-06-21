@@ -21,7 +21,7 @@ const project: Project = {
   },
 
   roof: {
-    variant: 'hip-roof',
+    variant: 'hip',
     isComplex: true,
   },
 

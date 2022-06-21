@@ -1,9 +1,10 @@
-import ListItem from "components/UI/ListItem";
-import InternalLink from "components/UI/InternalLink";
-import {useRouter} from "next/router";
-import Typography from "../../../../../UI/Typography";
+import { useRouter } from "next/router";
 
-type NavItemProps = {
+import InternalLink from "components/UI/InternalLink";
+import Typography from "components/UI/Typography";
+import ListItem from "components/UI/ListItem";
+
+export type NavItemProps = {
   href: string;
   caption: string;
 }

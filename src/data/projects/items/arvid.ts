@@ -17,7 +17,7 @@ const project: Project = {
   },
 
   roof: {
-    variant: 'gable-roof',
+    variant: 'gable',
   },
 
   style: 'scandinavian',

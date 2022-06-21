@@ -10,12 +10,16 @@ const project: Project = {
   isPopular: false,
   isSale: false,
 
+  area: {
+    common: 0,
+    balcony: 0,
+    terrace: 0,
+  },
+  roof: {
+    variant: 'gable'
+  },
 
-  area: 286.3,
-  balconyArea: 0,
-  terraceArea: 27,
-
-  tags: ['veranda', 'garage'],
+  tags: [],
   style: 'modern',
 
   size: {

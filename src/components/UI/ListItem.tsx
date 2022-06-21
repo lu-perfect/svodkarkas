@@ -1,12 +1,9 @@
-import type { PropsWithChildren } from "react";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-type ListItemProps = {
-  className?: string;
-  onClick?: () => void;
-}
+export type ListItemProps = DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement>;
 
-export const ListItem = ({ children, className, onClick } : PropsWithChildren<ListItemProps>) => (
-  <li className={`list-item${className ? ` ${className}` : ''}`} {...(onClick ? { onClick } : {})}>
+export const ListItem = ({ children, className, ...rest } : ListItemProps) => (
+  <li {...rest} className={`list-item${className ? ` ${className}` : ''}`}>
     {children}
   </li>
 );

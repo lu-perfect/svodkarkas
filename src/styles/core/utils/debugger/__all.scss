@@ -1,0 +1,15 @@
+@import "mixin";
+
+//
+// Sass Debugger
+/// @require {Boolean} $use-sass-debugger - global variable in Settings
+/// @require {Mixin} debugger - global variable in Settings
+/// @see  /Settings/_base-options.scss - All global options - All global options
+//
+
+@if $use-sass-debugger == true {
+  body {
+    @include debugger;
+  }
+}
+

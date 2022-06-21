@@ -3,7 +3,7 @@ import type { ReactElement, HTMLAttributeAnchorTarget } from "react";
 import ListItem from "components/UI/ListItem";
 import Link from "components/UI/Link";
 
-type HeaderLinkProps = {
+export type InfoLinkProps = {
   caption: string;
   icon: ReactElement;
 
@@ -14,14 +14,14 @@ type HeaderLinkProps = {
   tag?: keyof JSX.IntrinsicElements;
 }
 
-const HeaderLink = ({ caption, href, icon, tag: Tag = 'span', target, rel } : HeaderLinkProps) => (
-  <ListItem>
-    <Link href={href} className="link" target={target} rel={rel}>
+const InfoLink = ({ caption, href, icon, tag: Tag = 'span', target, rel } : InfoLinkProps) => (
+  <ListItem className="info-link">
+    <Link href={href} className="info-link__link" target={target} rel={rel}>
       {icon}
 
-      <Tag>{caption}</Tag>
+      <Tag className="info-link__caption">{caption}</Tag>
     </Link>
   </ListItem>
 );
 
-export default HeaderLink;
+export default InfoLink;

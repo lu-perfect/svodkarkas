@@ -1,8 +1,11 @@
-import type { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from "react";
+import type { BoxProps } from "./Box";
+import Box from "./Box";
 
-export const Wrapper = ({ children, className, ...rest } : PropsWithChildren<{ className?: string }> & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => (
-  <div {...rest} className={`wrapper${className ? ` ${className}` : ''}`}>
+export type WrapperProps = BoxProps;
+
+export const Wrapper = ({ children, className, ...rest } : WrapperProps) => (
+  <Box {...rest} className={`wrapper${className ? ` ${className}` : ''}`}>
     {children}
-  </div>
+  </Box>
 );
 export default Wrapper;

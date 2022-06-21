@@ -1,0 +1,20 @@
+//
+// Visibility Helper Classes
+/// @require {Boolean} $use-helper-visibility-styles - global variable in Settings
+/// @see  /Settings/_base-options.scss - All global options - Base Options
+//
+
+@if $use-helper-visibility-styles == true {
+  .is-hidden {
+    display: none;
+  }
+
+  .is-visible {
+    display: block;
+  }
+
+  /// @require {mixin} visually-hidden
+  .visually-hidden {
+    @include visually-hidden;
+  }
+}

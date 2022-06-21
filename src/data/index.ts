@@ -3,7 +3,7 @@ import projects, { mainProjects } from "./projects";
 import prices from "./prices";
 
 type IData = {
-  packages: Array<Package>,
+  packages: Packages,
   projects: Array<Project>,
   mainProjects: Array<Project>,
   prices: {

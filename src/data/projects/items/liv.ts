@@ -2,31 +2,34 @@ const project: Project = {
   id: 'liv',
 
   title: 'Лив',
-  preview: '',
-  description: '',
 
   covers: 1,
   facades: 4,
   floors: 2,
 
-  isPopular: false,
+  isPopular: true,
   isSale: false,
 
-  prices: [0, 0, 0],
-
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
-
-  tags: [],
-  style: 'classic',
-
-  size: {
-    x: 0,
-    y: 0
+  area: {
+    common: 192.7,
+    balcony: 0,
+    terrace: 31.2,
   },
 
-  bedrooms: 0,
-  bathrooms: 0,
+  roof: {
+    variant: 'gable',
+    isComplex: true,
+  },
+
+  tags: [],
+  style: 'chalet',
+
+  size: {
+    x: 9.4,
+    y: 13.5
+  },
+
+  bedrooms: 3,
+  bathrooms: 2,
 }
 export default project;

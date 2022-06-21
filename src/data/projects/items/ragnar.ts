@@ -2,8 +2,6 @@ const project: Project = {
   id: 'ragnar',
 
   title: 'Рагнар',
-  preview: '',
-  description: '',
 
   covers: 1,
   facades: 4,
@@ -12,11 +10,14 @@ const project: Project = {
   isPopular: false,
   isSale: false,
 
-  prices: [0, 0, 0],
-
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
+  area: {
+    common: 0,
+    balcony: 0,
+    terrace: 0,
+  },
+  roof: {
+    variant: 'gable'
+  },
 
   tags: [],
   style: 'classic',

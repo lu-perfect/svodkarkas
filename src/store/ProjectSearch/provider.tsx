@@ -109,15 +109,15 @@ export default function ProjectSearchProvider({ children } : PropsWithChildren<{
     switch (orderBy) {
       case priceKey:
         res = res.sort((a, b) => {
-          return (getProjectPrice(a, 1) > getProjectPrice(b, 1) ? 1 : -1) * (orderAsc ? 1 : -1);
+          return (getProjectPrice(a, 1) - getProjectPrice(b, 1)) * (orderAsc ? 1 : -1);
         })
         break;
-      case null:
+      case areaKey:
+        res = res.sort((a, b) => {
+          return (a.area.common - b.area.common) * (orderAsc ? 1 : -1);
+        })
         break;
       default:
-        res = res.sort((a, b) => {
-          return (a[orderBy] > b[orderBy] ? 1 : -1) * (orderAsc ? 1 : -1);
-        })
         break;
     }
 

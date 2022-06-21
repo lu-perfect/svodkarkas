@@ -1,0 +1,297 @@
+:root {
+  --ff-primary: 'Roboto', sans-serif;
+  --ff-secondary: 'Montserrat', sans-serif;
+}
+
+
+/* Settings */
+@import 'settings/_all';
+
+/* Core */
+@import 'core/_all';
+
+/* Components */
+@import 'components/_all';
+
+/* Pages */
+@import 'pages/home';
+@import 'pages/about';
+@import 'pages/contacts';
+@import 'pages/admin';
+@import 'pages/projects';
+@import 'pages/gallery';
+@import 'pages/credit';
+
+/* Vendors */
+@import 'vendors/photoswipe';
+
+// temp
+
+.ReactModal__Overlay {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
+  animation-name: modal-animate-wrap-in;
+  background-color: rgba(0,0,0,0.5) !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 20px;
+}
+.ReactModal__Overlay {
+  h2 {
+    font-size: 28px;
+    color: #333333;
+    margin: 0 0 28px;
+    text-transform: none;
+    line-height: 1.2;
+    padding-right: 37px;
+    font-weight: 700;
+    font-family: $base-font-secondary;
+  }
+}
+
+.ReactModal__Content {
+  inset: 0 !important;
+  position: relative !important;
+
+  .form-field {
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+
+    position: relative;
+    padding: 0 0 13px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #666;
+    box-sizing: border-box;
+
+    label {
+      margin-bottom: 5px;
+      font-weight: normal;
+      font-size: 16px;
+      color: #828282;
+    }
+
+    input {
+      background: #F6F6F6;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      color: #333;
+      height: 44px;
+      line-height: 44px;
+      padding-left: 12px;
+    }
+  }
+
+  .close-btn {
+    width: 38px;
+    height: 38px;
+    background: color(brand, main);
+    border-radius: 20px;
+    z-index: 9993;
+    right: calc(55px / 2);
+    top: 37px;
+    font-size: 18px;
+    stroke-width: 3px;
+    position: absolute;
+    padding: 18px;
+    stroke-linecap: round;
+    cursor: pointer;
+
+    & > .icon {
+      stroke: #fff;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      left: 50%;
+      margin-left: -5px;
+      top: 50%;
+      margin-top: -5px;
+    }
+  }
+
+  .bottom {
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  button {
+    margin-left: auto;
+
+    white-space: nowrap;
+  }
+
+  .privacy {
+    font-size: 13px;
+    color: #828282;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    input {
+      margin-right: 3px;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    a {
+      display: inline-block;
+      color: #555 !important;
+      text-decoration: underline !important;
+    }
+  }
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 10000;
+  background-color: rgba(0,0,0,0.5) !important;
+}
+.ReactModal__Content--after-open {
+  padding: 37px 55px !important;
+
+  box-shadow: 0 0 25px 0 rgb(0 0 0 / 40%);
+  border-radius: 25px 0 !important;
+}
+
+
+@keyframes modal-animate-wrap-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+section.services {
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .service-item {
+    display: flex;
+
+
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
+
+    &__info,
+    & > picture {
+      width: 50%;
+    }
+
+    picture {
+      height: 569px;
+    }
+
+    h2 {
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    li {
+      color: #989898;
+    }
+
+    p {
+      font-size: 18px;
+      color: #989898;
+    }
+
+    ol {
+      padding-top: 12px;
+
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 24px;
+      gap: 12px;
+
+      counter-reset: myCounter;
+      li {
+        list-style: none;
+        padding-left: 80px;
+        position: relative;
+
+        &:before {
+          position: absolute;
+          left: 0;
+          counter-increment: myCounter;
+          content:'0'counter(myCounter);
+          color: color(black);
+          @extend .h2;
+          font-weight: 700;
+        }
+        &:after {
+          content: '';
+          height: 3px;
+          width: 25px;
+          background: color(brand, main);
+          position: absolute;
+          top: 14px;
+          left: 40px;
+          margin-top: -1px;
+        }
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      li {
+        // icon
+      }
+
+      li, a {
+        display: flex;
+        gap: 6px;
+
+        color: color(brand, main);
+
+        span {
+          color: #989898;
+        }
+      }
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 25px 0;
+
+      box-shadow: 5px 15px 70px -15px #989898;
+    }
+
+    &__info {
+      padding-left: 60px;
+      padding-top: 58px;
+    }
+    &--reversed {
+      .service-item__info {
+        order: -1;
+        padding-left: 0;
+        padding-right: 60px;
+        padding-top: 58px;
+      }
+    }
+
+
+    &:first-of-type {
+      .service-item__info {
+        padding-top: 0 !important;
+      }
+    }
+  }
+}

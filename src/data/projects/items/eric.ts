@@ -10,9 +10,14 @@ const project: Project = {
   isPopular: false,
   isSale: false,
 
-  area: 0,
-  balconyArea: 0,
-  terraceArea: 0,
+  area: {
+    common: 0,
+    balcony: 0,
+    terrace: 0,
+  },
+  roof: {
+    variant: 'gable'
+  },
 
   tags: [],
   style: 'classic',

@@ -1,0 +1,14 @@
+//
+// Remove the unit of a length
+/// @group Utilities
+/// @param {Number (with unit)} $number - Value to strip
+/// @return {Number} - Stripped value
+//
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}

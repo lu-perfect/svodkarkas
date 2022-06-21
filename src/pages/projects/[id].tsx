@@ -12,8 +12,6 @@ import Icon from "components/UI/Icon";
 import List from "components/UI/List";
 import Box from "components/UI/Box";
 
-import Slide from 'components/Slide';
-
 import Layout from 'components/Layout';
 
 import getProjectPrice from "utils/getProjectPrice";
@@ -21,6 +19,7 @@ import formatPrice from "utils/formatPrice";
 
 import data from "data";
 import * as math from "mathjs";
+import { Gallery, Item } from "react-photoswipe-gallery";
 
 const PackageHeader = ({ title } : { title: string }) => (
   <Box className="package-header">
@@ -31,18 +30,17 @@ const PackageHeader = ({ title } : { title: string }) => (
 
 const PackageFooter = ({ price } : { price: number }) => (
   <Box className="package-footer">
-    <Typography className="package-footer-title">Итого к заказу</Typography>
     <Typography tag="h4" className="h2 price">
       {formatPrice(price)}
     </Typography>
 
-    <Button variant="slider">
-      Заказать этот проект
+    <Button variant="outline">
+      Заказать
     </Button>
   </Box>
 );
 
-const PackageRow = ({ i, title, paragraphs } : Omit<PackageBlock, 'id'> & { i: number }) => (
+const PackageRow = ({ i, title, paragraphs, index } : Omit<PackageBlock, 'id'> & { i: number, index: number }) => (
   <Box className="package-row" style={{ gridRow: i + 2 }}>
     <Typography className="package-row-title">
       {title}
@@ -55,7 +53,7 @@ const PackageRow = ({ i, title, paragraphs } : Omit<PackageBlock, 'id'> & { i: n
 
       if (paragraphs.length === 1) {
         return (
-          <Typography className={paragraphs[0].isEmpty ? 'is-empty' : ''} tag="p">
+          <Typography className={!paragraphs[0].dots[index] ? 'is-empty' : ''} tag="p">
             {paragraphs[0].content}
           </Typography>
         );
@@ -65,7 +63,7 @@ const PackageRow = ({ i, title, paragraphs } : Omit<PackageBlock, 'id'> & { i: n
         <List>
           {paragraphs.map((paragraph) => (
             <ListItem key={paragraph.id}>
-              <Typography className={paragraph.isEmpty ? 'is-empty' : ''} tag="p">
+              <Typography className={!paragraph.dots[index] ? 'is-empty' : ''} tag="p">
                 {paragraph.content}
               </Typography>
             </ListItem>
@@ -77,57 +75,53 @@ const PackageRow = ({ i, title, paragraphs } : Omit<PackageBlock, 'id'> & { i: n
   </Box>
 );
 
-const Package = ({ title, blocks, price } : Omit<Package, 'id'> & { price: number }) => (
-  <>
-    <PackageHeader title={title} />
+const Package = ({ title, blocks, price, index } : Omit<Package, 'id'> & { price: number, index: number }) => {
+  const [variant, setVariant] = useState<1 | 2>(1);
 
+  return (
     <>
-      {blocks.map((block, i) => (
-        <PackageRow
-          key={block.id}
-          i={i}
-          title={block.title}
-          paragraphs={block.paragraphs}
-        />
-      ))}
+      <PackageHeader title={title} />
+
+      <>
+        {blocks.map((block, i) => (
+          <PackageRow
+            key={block.id}
+            i={i}
+            title={block.title}
+            paragraphs={block.paragraphs}
+            index={index}
+          />
+        ))}
+      </>
+
+      <Box className="package-row custom" style={{ gridRow: blocks.length + 2 }}>
+        <Typography className="package-row-title">
+          На выбор
+        </Typography>
+
+        <Box className={`variant${variant === 1 ? ' active' : ''}`} onClick={() => setVariant(1)}>
+          <Typography tag="h4">
+            Свайно-винтовой фундамент
+          </Typography>
+          <Typography>
+            <strong>{formatPrice(price)}</strong>
+          </Typography>
+        </Box>
+
+        <Box className={`variant${variant === 2 ? ' active' : ''}`} onClick={() => setVariant(2)}>
+          <Typography tag="h4">
+            Железобетонные сваи
+          </Typography>
+          <Typography>
+            <strong>{formatPrice(price + 200000)}</strong>
+          </Typography>
+        </Box>
+      </Box>
+
+      <PackageFooter price={variant === 1 ? price : price + 200000} />
     </>
-
-    <Box className="package-row custom" style={{ gridRow: blocks.length + 2 }}>
-      <Typography className="package-row-title">
-        На выбор
-      </Typography>
-
-      <Box className="variant">
-        <Typography tag="h4">
-          Свайно-винтовой фундамент
-        </Typography>
-        <Typography>
-          <strong>{price}</strong>
-        </Typography>
-      </Box>
-
-      <Box className="variant active">
-        <Typography tag="h4">
-          Железобетонные сваи
-        </Typography>
-        <Typography>
-          <strong>{price}</strong>
-        </Typography>
-      </Box>
-    </Box>
-
-    <PackageFooter price={price} />
-  </>
-);
-
-const TabHead = ({ icon, caption, onClick, isActive } : { icon: ReactElement, caption: string, isActive: boolean, onClick: () => void }) => (
-  <ListItem className={`tab${isActive ? ' active' : ''}`} onClick={onClick}>
-    <Box className="icon-wrapper">
-      {icon}
-    </Box>
-    <Typography>{caption}</Typography>
-  </ListItem>
-);
+  );
+}
 
 type Slides = {
   covers: Array<{ title: string, url: string }>,
@@ -136,7 +130,6 @@ type Slides = {
 };
 
 const ProjectPage: NextPage<{ project: Project & { prices: Array<number>, minPrice: string, terraceAndBalconyArea: string, slides: Slides } }> = ({ project }) => {
-  const [tab, setTab] = useState<'prices' | 'gallery' >('prices');
   const [slide, setSlide] = useState(1);
 
   return (
@@ -165,23 +158,75 @@ const ProjectPage: NextPage<{ project: Project & { prices: Array<number>, minPri
             <Box>
               <Box className="image-wrapper">
                 <Box className="slider-container">
-                  <Box className="slider" style={{ transform: `translateX(-${(slide - 1) * 100}%)` }}>
-                    {project.slides.covers.map((slide) => (
-                      <Box key={slide.title}>
-                        <img src={slide.url} alt={slide.title} style={{ objectFit: 'cover' }} />
-                      </Box>
-                    ))}
-                    {project.slides.facades.map((slide) => (
-                      <Box key={slide.title}>
-                        <img src={slide.url} alt={slide.title} />
-                      </Box>
-                    ))}
-                    {project.slides.plans.map((slide) => (
-                      <Box key={slide.title} style={{ padding: '20px 0' }}>
-                        <Slide {...slide} />
-                      </Box>
-                    ))}
-                  </Box>
+                  <Gallery>
+                    <Box className="slider" style={{ transform: `translateX(-${(slide - 1) * 100}%)` }}>
+                      {project.slides.covers.map((slide) => (
+                        <Box key={slide.title}>
+                          <Item
+                            original={slide.url} // 1024/768
+                            width={1024}
+                            height={768}
+                          >
+                            {({ ref, open }) => (
+                              <img
+                                width={1024} height={768}
+                                ref={ref as any}
+                                role="button"
+                                tabIndex={-1}
+                                alt={slide.title}
+                                loading="lazy"
+                                onClick={open}
+                                style={{ objectFit: 'cover' }}
+                                src={slide.url} />
+                            )}
+                          </Item>
+                        </Box>
+                      ))}
+                      {project.slides.facades.map((slide) => (
+                        <Box key={slide.title}>
+                          <Item
+                            original={slide.url} // 1024/768
+                            width={1024}
+                            height={768}
+                          >
+                            {({ ref, open }) => (
+                              <img
+                                width={1024} height={768}
+                                ref={ref as any}
+                                role="button"
+                                tabIndex={-1}
+                                alt={slide.title}
+                                loading="lazy"
+                                onClick={open}
+                                src={slide.url} />
+                            )}
+                          </Item>
+                        </Box>
+                      ))}
+                      {project.slides.plans.map((slide) => (
+                        <Box key={slide.title} style={{ padding: '20px 0' }}>
+                          <Item
+                            original={slide.url} // 1024/768
+                            width={1024}
+                            height={768}
+                          >
+                            {({ ref, open }) => (
+                              <img
+                                width={1024} height={768}
+                                ref={ref as any}
+                                role="button"
+                                tabIndex={-1}
+                                style={{ padding: '20px 0' }}
+                                alt={slide.title}
+                                loading="lazy"
+                                onClick={open}
+                                src={slide.url} />
+                            )}
+                          </Item>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Gallery>
 
                   <Box className="controls">
                     <Button onClick={() => setSlide(slide === 1 ? project.covers + project.facades + (project.floors === 'masandra' ? 3 : project.floors) : slide - 1)}>
@@ -312,88 +357,76 @@ const ProjectPage: NextPage<{ project: Project & { prices: Array<number>, minPri
         </Container>
       </section>
 
-      <section className="project-info">
+      <section className={`plans ${project.slides.plans.length === 2 ? 'two' : 'one'}-storey`}>
         <Container>
-          <List className="tabs">
-            <TabHead
-              icon={(
-                <Icon viewBox="0 0 502 502">
-                  <path d="M10,140.444c5.522,0,10-4.477,10-10V82.222c0-5.523-4.478-10-10-10s-10,4.477-10,10v48.222     C0,135.967,4.478,140.444,10,140.444z"/>
-                  <path d="M10,429.778c5.522,0,10-4.477,10-10v-48.222c0-5.523-4.478-10-10-10s-10,4.477-10,10v48.222     C0,425.301,4.478,429.778,10,429.778z"/>
-                  <path d="M10,236.889c5.522,0,10-4.477,10-10v-48.223c0-5.523-4.478-10-10-10s-10,4.477-10,10v48.223     C0,232.412,4.478,236.889,10,236.889z"/>
-                  <path d="M10,333.333c5.522,0,10-4.477,10-10v-48.222c0-5.523-4.478-10-10-10s-10,4.477-10,10v48.222     C0,328.856,4.478,333.333,10,333.333z"/>
-                  <path d="M10,44c5.522,0,10-4.477,10-10V20h14c5.522,0,10-4.477,10-10S39.522,0,34,0H10C4.478,0,0,4.477,0,10v24     C0,39.523,4.478,44,10,44z"/>
-                  <path d="M371.556,20h48.223c5.522,0,10-4.477,10-10s-4.478-10-10-10h-48.223c-5.522,0-10,4.477-10,10S366.033,20,371.556,20z"/>
-                  <path d="M178.667,20h48.223c5.522,0,10-4.477,10-10s-4.478-10-10-10h-48.223c-5.522,0-10,4.477-10,10S173.145,20,178.667,20z"/>
-                  <path d="M82.223,20h48.223c5.522,0,10-4.477,10-10s-4.478-10-10-10H82.223c-5.522,0-10,4.477-10,10S76.7,20,82.223,20z"/>
-                  <path d="M275.111,20h48.223c5.522,0,10-4.477,10-10s-4.478-10-10-10h-48.223c-5.522,0-10,4.477-10,10S269.589,20,275.111,20z"/>
-                  <path d="M492,0h-24c-5.522,0-10,4.477-10,10s4.478,10,10,10h14v14c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10V10     C502,4.477,497.522,0,492,0z"/>
-                  <path d="M492,265.111c-5.522,0-10,4.477-10,10v48.223c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10v-48.223     C502,269.588,497.522,265.111,492,265.111z"/>
-                  <path d="M492,72.222c-5.522,0-10,4.477-10,10v48.222c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10V82.222     C502,76.699,497.522,72.222,492,72.222z"/>
-                  <path d="M492,361.556c-5.522,0-10,4.477-10,10v48.222c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10v-48.222     C502,366.033,497.522,361.556,492,361.556z"/>
-                  <path d="M492,168.667c-5.522,0-10,4.477-10,10v48.222c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10v-48.222     C502,173.144,497.522,168.667,492,168.667z"/>
-                  <path d="M492,458c-5.522,0-10,4.477-10,10v14H20v-14c0-5.523-4.478-10-10-10s-10,4.477-10,10v24c0,5.523,4.478,10,10,10h482     c5.522,0,10-4.477,10-10v-24C502,462.477,497.522,458,492,458z"/>
-                  <path d="M251,419.5c-5.522,0-10,4.477-10,10V457c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10v-27.5     C261,423.977,256.522,419.5,251,419.5z"/>
-                  <path d="M251,184.5c5.522,0,10-4.477,10-10v-51c0-5.523-4.478-10-10-10c-5.522,0-10,4.477-10,10v51     C241,180.023,245.478,184.5,251,184.5z"/>
-                  <path d="M261,327.5c0-5.523-4.478-10-10-10c-5.522,0-10,4.477-10,10v51c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10V327.5z"/>
-                  <path d="M251,82.5c5.522,0,10-4.477,10-10V45c0-5.523-4.478-10-10-10c-5.522,0-10,4.477-10,10v27.5     C241,78.023,245.478,82.5,251,82.5z"/>
-                  <path d="M35,251c0,5.523,4.478,10,10,10h27.5c5.522,0,10-4.477,10-10s-4.478-10-10-10H45C39.478,241,35,245.477,35,251z"/>
-                  <path d="M327.5,241c-5.522,0-10,4.477-10,10s4.478,10,10,10h51c5.522,0,10-4.477,10-10s-4.478-10-10-10H327.5z"/>
-                  <path d="M215.5,251c0,5.523,4.478,10,10,10H241v15.5c0,5.523,4.478,10,10,10c5.522,0,10-4.477,10-10V261h15.5     c5.522,0,10-4.477,10-10s-4.478-10-10-10H261v-15.5c0-5.523-4.478-10-10-10c-5.522,0-10,4.477-10,10V241h-15.5     C219.978,241,215.5,245.477,215.5,251z"/>
-                  <path d="M123.5,241c-5.522,0-10,4.477-10,10s4.478,10,10,10h51c5.522,0,10-4.477,10-10s-4.478-10-10-10H123.5z"/>
-                  <path d="M419.5,251c0,5.523,4.478,10,10,10H457c5.522,0,10-4.477,10-10s-4.478-10-10-10h-27.5     C423.978,241,419.5,245.477,419.5,251z"/>
-                </Icon>
-              )}
-              onClick={() => setTab('prices')}
-              isActive={tab === 'prices'}
-              caption="Комплектации и цены"
-            />
-            <TabHead
-              icon={(
-                <Icon viewBox="0 0 512 512">
-                  <path d="M345.089,459.056H48.407c-17.432,0-31.614-14.182-31.614-31.615V84.558c0-17.433,14.182-31.615,31.614-31.615h56.61    c4.638,0,8.396-3.759,8.396-8.396s-3.758-8.396-8.396-8.396h-56.61C21.715,36.151,0,57.867,0,84.558v342.883    c0,26.693,21.715,48.408,48.407,48.408h296.683c4.638,0,8.396-3.759,8.396-8.396S349.727,459.056,345.089,459.056z"/>
-                  <path d="M463.593,36.15H136.026c-4.638,0-8.396,3.759-8.396,8.396s3.758,8.397,8.396,8.397h327.568    c17.432,0,31.614,14.182,31.614,31.615v342.883c0,17.433-14.182,31.615-31.614,31.615h-84.919c-4.638,0-8.396,3.759-8.396,8.396    s3.758,8.396,8.396,8.396h84.919c26.692,0,48.407-21.715,48.407-48.408V84.558C512,57.867,490.285,36.15,463.593,36.15z"/>
-                  <path d="M440.507,73.792H71.494c-18.668,0-33.854,15.186-33.854,33.854v54.07c-0.003,0.113-0.001,0.225,0,0.338v242.3    c0,18.629,15.124,33.788,33.738,33.852c0.038,0,0.077,0.006,0.116,0.006c0.01,0,0.019-0.002,0.029-0.002h123.925    c0.012,0,0.025,0.002,0.036,0.002c0,0,0.018-0.002,0.027-0.002h244.996c18.666-0.001,33.853-15.187,33.853-33.855v-170.35    c0-0.004,0-0.009,0-0.013V107.646C474.36,88.978,459.173,73.792,440.507,73.792z M66.128,420.538    c-6.784-2.257-11.694-8.653-11.694-16.184v-61.325c18.11-19.773,40.655-30.34,67.087-31.365c8.115-0.316,15.441,0.357,21.383,1.3    C108.92,342.889,81.362,383.442,66.128,420.538z M54.433,166.28c7.25-4.757,15.615-7.254,24.42-7.254    c19.284,0,36.325,12.292,42.405,30.59c0.798,2.404,2.639,4.318,5.011,5.21c2.369,0.891,5.017,0.667,7.203-0.613    c7.462-4.373,15.988-6.684,24.657-6.684c24.677,0,45.526,18.451,48.494,42.918c0.47,3.878,3.554,6.92,7.439,7.337    c17.43,1.873,31.739,14.426,36.464,30.746c-13.721-0.844-27.871,0.978-42.19,5.526c-16.911,5.371-33.281,14.218-48.647,25.42    c-6.81-1.968-20.807-5.183-38.094-4.616c-18.445,0.606-43.672,5.774-67.161,25.052V166.28H54.433z M457.566,404.354    c0,9.407-7.653,17.061-17.06,17.061H209.175c4.955-8.942,10.609-17.663,16.148-26.175c3.732-5.737,7.593-11.671,11.212-17.63    c2.406-3.964,1.143-9.129-2.82-11.536c-3.963-2.405-9.127-1.144-11.536,2.82c-3.482,5.736-7.27,11.558-10.933,17.188    c-7.342,11.285-14.898,22.911-21.052,35.334H83.971c29.733-68.724,86.451-117.7,129.446-131.356    c25.683-8.157,49.799-6.355,71.844,5.335c-1.611,1.487-3.216,2.99-4.814,4.518c-10.743,10.274-21.354,21.656-31.538,33.832    c-1.16,1.387-2.312,2.78-3.456,4.18c-2.933,3.591-2.4,8.881,1.19,11.814c3.482,2.845,8.905,2.372,11.815-1.19    c1.102-1.349,2.211-2.691,3.331-4.029c9.787-11.701,19.969-22.625,30.264-32.469c11.674-11.164,23.73-21.164,35.833-29.727    c13.364-9.453,27.097-17.377,40.82-23.553c15.048-6.771,30.469-11.614,45.832-14.392c14.154-2.56,28.595-3.411,43.027-2.575    V404.354z M457.566,224.996c-15.437-0.819-30.873,0.12-46.017,2.858c-16.708,3.022-33.44,8.272-49.733,15.604    c-14.707,6.617-29.385,15.082-43.628,25.158c-6.557,4.638-13.093,9.676-19.561,15.062c-9.688-5.821-19.853-9.989-30.359-12.504    c-3.764-24.083-22.254-43.79-46.051-49.046c-6.573-29.706-33.082-51.391-64.09-51.391c-8.467,0-16.835,1.642-24.627,4.796    c-10.411-20.244-31.339-33.299-54.648-33.299c-8.55,0-16.797,1.718-24.42,5.028v-39.615h0.001c0-9.407,7.654-17.061,17.061-17.061    h369.011c9.407,0,17.06,7.654,17.06,17.061V224.996z"/>
-                  <path d="M340.64,132.32c-24.442,0-44.328,19.886-44.328,44.328s19.886,44.328,44.328,44.328c24.442,0,44.328-19.886,44.328-44.328    C384.969,152.206,365.083,132.32,340.64,132.32z M340.64,204.185c-15.184,0-27.536-12.353-27.536-27.536    c0.001-15.184,12.353-27.536,27.536-27.536c15.184,0,27.536,12.352,27.536,27.536C368.176,191.832,355.824,204.185,340.64,204.185    z"/>
-                </Icon>
-              )}
-              onClick={() => setTab('gallery')}
-              isActive={tab === 'gallery'}
-              caption="Галерея"
-            />
-          </List>
+          <Gallery>
+            {project.slides.plans.map((slide) => (
+              <Item
+                key={slide.url}
+                original={slide.url}
+                width={1024}
+                height={768}
+              >
+                {({ ref, open }) => (
+                  <figure className="gallery-item plan" key={slide.url}>
+                    <img
+                      width={1024} height={768}
+                      ref={ref as any}
+                      className="cover"
+                      onClick={open}
+                      role="button"
+                      tabIndex={-1}
+                      alt={slide.title}
+                      loading="lazy"
+                      src={slide.url} />
+                  </figure>
+                )}
+              </Item>
+            ))}
+            {project.slides.facades.map((slide) => (
+              <Item
+                key={slide.url}
+                original={slide.url}
+                width={1024}
+                height={768}
+              >
+                {({ ref, open }) => (
+                  <figure className="gallery-item facade" key={slide.url}>
+                    <img
+                      width={1024} height={768}
+                      ref={ref as any}
+                      className="cover"
+                      onClick={open}
+                      role="button"
+                      tabIndex={-1}
+                      alt={slide.title}
+                      loading="lazy"
+                      src={slide.url} />
+                  </figure>
+                )}
+              </Item>
+            ))}
+          </Gallery>
         </Container>
       </section>
 
-      {tab === 'prices' && (
-        <section className="project-packages">
-          <Container>
-            <Box className="project-packages-grid">
-              <Package price={project.prices[0]} title={data.packages[0].title} blocks={data.packages[0].blocks} />
-              <Package price={project.prices[1]} title={data.packages[1].title} blocks={data.packages[1].blocks} />
-              <Package price={project.prices[2]} title={data.packages[2].title} blocks={data.packages[2].blocks} />
-            </Box>
-          </Container>
-        </section>
-      )}
+      <section className="project-packages">
+        <Container>
+          <Box>
+            <Typography tag="h2" className="title">
+              Комплектации
+            </Typography>
 
-      {tab === 'gallery' && (
-        <section className="gallery project-gallery">
-          <Container>
-            <Box className="gallery-container">
-              {project.slides.covers.map((item) => (
-                <Slide key={item.title} title={item.title} url={item.url} />
-              ))}
-              {project.slides.facades.map((item) => (
-                <Slide key={item.title} title={item.title} url={item.url} />
-              ))}
-              {project.slides.plans.map((item) => (
-                <Slide key={item.title} title={item.title} url={item.url} />
-              ))}
-            </Box>
-          </Container>
-        </section>
-      )}
+
+          </Box>
+
+          <Box className="project-packages-grid">
+            <Package price={project.prices[0]} title={data.packages.titles[0]} blocks={data.packages.blocks} index={0} />
+            <Package price={project.prices[1]} title={data.packages.titles[1]} blocks={data.packages.blocks} index={1} />
+            <Package price={project.prices[2]} title={data.packages.titles[2]} blocks={data.packages.blocks} index={2} />
+          </Box>
+        </Container>
+      </section>
     </Layout>
   )
 }

@@ -1,0 +1,14 @@
+//
+/// @group Selectors
+/// @param {Widget} $states - Selector group
+//
+
+@mixin parentState($states...) {
+  $parent: nth(nth(&, 1), (length(nth(&, 1))-1));
+
+  @each $state in $states {
+    @at-root #{selector-replace(&, $parent, ($parent#{$state}))} {
+        @content;
+    }
+  }
+}

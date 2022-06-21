@@ -1,14 +1,9 @@
-import type { PropsWithChildren, CSSProperties } from "react";
+import type { HTMLAttributes, DetailedHTMLProps } from "react";
 
-type BoxProps = {
-  id?: string;
-  className?: string;
+export type BoxProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-  style?: CSSProperties;
-}
-
-export const Box = ({ children, id, style, className } : PropsWithChildren<BoxProps>) => (
-  <div id={id} className={`box${className ? ` ${className}` : ''}`} style={style}>
+export const Box = ({ children, className, ...rest } : BoxProps) => (
+  <div {...rest} className={`box${className ? ` ${className}` : ''}`}>
     {children}
   </div>
 );

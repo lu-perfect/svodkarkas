@@ -1,20 +1,19 @@
-import type { PropsWithChildren } from "react";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-type ButtonProps = {
+export type ButtonProps = DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
   caption?: string;
-  className?: string;
 
   type?: 'button' | 'submit';
 
-  variant?: 'slider';
+  variant?: 'slider' | 'outline';
+};
 
-  onClick?: () => void;
-
-  'aria-label'?: string;
-}
-
-export const Button = ({ children, type = 'button', className, caption, variant, onClick, 'aria-label': ariaLabel } : PropsWithChildren<ButtonProps>) => (
-  <button type={type} className={`button${className ? ` ${className}` : ''}${variant ? ` ${variant}` : ''}`} aria-label={ariaLabel} onClick={onClick}>
+export const Button = ({ children, type = 'button', className, caption, variant, ...rest } : ButtonProps) => (
+  <button
+    {...rest}
+    type={type}
+    className={`button${className ? ` ${className}` : ''}${variant ? ` ${variant}` : ''}`}
+  >
     {caption || children}
   </button>
 );

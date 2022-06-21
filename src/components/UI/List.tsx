@@ -1,11 +1,9 @@
-import type { PropsWithChildren } from "react";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-type ListProps = {
-  className?: string;
-}
+export type ListProps = DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>;
 
-export const List = ({ children, className } : PropsWithChildren<ListProps>) => (
-  <ul className={`list${className ? ` ${className}` : ''}`}>
+export const List = ({ children, className, ...rest } : ListProps) => (
+  <ul {...rest} className={`list${className ? ` ${className}` : ''}`}>
     {children}
   </ul>
 );

@@ -1,0 +1,142 @@
+.root {
+  background-image: url("/images/pages/home/hero.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  height: calc(100vh - 147.8px);
+
+  @media (max-width: 992px) {
+    height: calc(100vh - 178.4px);
+  }
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 198.1px - 71.8px);
+  }
+
+  @media (max-width: 640px) {
+    height: calc(100vh - 187px - 71.8px);
+  }
+}
+
+.container {
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 640px) {
+    display: flex;
+  }
+}
+
+.wrapper {
+  padding-block: var(--section-padding);
+
+  background: rgba(0, 0, 0, .5);
+  border-radius: 25px 0;
+  padding: 32px 32px 32px 48px;
+
+  @media (min-width: 768px) {
+    max-width: 400px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 525px;
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 1920px) {
+    max-width: 100%;
+    min-height: 25%;
+  }
+
+  @media (max-width: 992px) {
+    padding: 24px 24px 24px 32px;
+  }
+
+  @media (max-width: 768px) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
+.title {
+  color: var(--color-white);
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: var(--color-secondary);
+  margin-bottom: 20px;
+  line-height: 1.2;
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.subtitle {
+  color: var(--color-white);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  @media (max-width: 992px) {
+    display: none;
+  }
+
+  .icon {
+    color: var(--color-white);
+    margin-top: -1px;
+  }
+
+  span {
+    color: var(--color-white);
+    font-size: .875rem;
+    font-weight: 500;
+    font-family: var(--ff-secondary);
+  }
+}
+
+.text {
+  color: white;
+  font-size: .875rem;
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  line-height: 1.8;
+  border-left: 1px solid;
+  margin-bottom: 30px;
+
+  background: rgba(0, 0, 0, .25);
+  padding: 10px 0 10px 12px;
+  border-radius: 0 8px 8px 0;
+
+  @media (min-width: 1200px) {
+    padding-left: 15px;
+    max-width: 450px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 992px) {
+    font-size: .813rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+}
+
+.button {
+  box-shadow: var(--shadow-2);
+
+  background: rgba(0, 0, 0, .5);
+  border-color: var(--color-dark);
+
+  @media (max-width: 768px) {
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,93 @@
+.root {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  transition: all .25s ease;
+
+  box-shadow: inset 0 1px 0.5px hsla(0, 0%, 100%, 0.075), var(--shadow-1);
+
+  &:hover {
+    box-shadow: inset 0 1px 0.5px hsla(0, 0%, 100%, 0.075), var(--shadow-2);
+  }
+
+  .button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    padding: 18px 18px 18px 24px;
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+  }
+
+  svg {
+    color: var(--color-primary);
+
+    rect {
+      transition: all var(--transition);
+      transform: scaleY(1);
+      transform-origin: 50% 50%;
+    }
+  }
+
+  p {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    display: none;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 24px;
+      left: 24px;
+      height: 1px;
+      background-color: rgba(0,0,0,.08);
+    }
+
+    position: relative;
+    padding: 14px 24px 26px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
+
+.open {
+  svg {
+    color: var(--color-secondary);
+
+    rect:nth-child(1) {
+      transform: scaleY(0);
+    }
+  }
+
+  p {
+    animation: accordion-animation .4s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    display: block;
+  }
+}
+
+@keyframes accordion-animation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px)
+  }
+}

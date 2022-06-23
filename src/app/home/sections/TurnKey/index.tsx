@@ -1,28 +1,27 @@
-import Typography from "components/UI/Typography";
 import Container from "components/UI/Container";
-import ListItem from "components/UI/ListItem";
-import List from "components/UI/List";
 
 import ServiceCard from "./ServiceCard";
+
+import styles from './styles.module.scss';
 
 import services from "./services.data";
 
 const TurnKeySection = () => (
-  <section id="turnkey">
+  <section id="turnkey" className={styles.root}>
     <Container>
-      <Typography tag="p" className="subtitle">Наши услуги</Typography>
+      <p className="subtitle">Наши услуги</p>
 
-      <Typography tag="h2" className="h2 title">
+      <h2 className="title">
         Дом под ключ
-      </Typography>
+      </h2>
 
-      <List className="services-list">
+      <ul className={styles.list}>
         {services.map((service) => (
-          <ListItem key={service.title}>
+          <li key={service.title}>
             <ServiceCard key={service.title} {...service} />
-          </ListItem>
+          </li>
         ))}
-      </List>
+      </ul>
     </Container>
   </section>
 );

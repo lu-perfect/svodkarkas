@@ -4,9 +4,11 @@ import Layout from 'components/Layout';
 
 import type { HomePageProps } from 'app/home/page';
 import Content from 'app/home/page';
-import {mainProjects} from "../data/projects";
-import getProjectTags from "../utils/getProjectTags";
-import {gallery} from "../data/gallery";
+
+import { mainProjects } from "data/projects";
+import { gallery } from "data/gallery";
+
+import getProjectTags from "utils/getProjectTags";
 
 const HomePage: NextPage<HomePageProps> = (props) => (
   <Layout>

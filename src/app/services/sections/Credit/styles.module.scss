@@ -1,0 +1,127 @@
+.root {
+  padding-block-start: 30px;
+  padding-block-end: 20px;
+}
+
+.tabs {
+  padding-top: 24px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  margin-inline: -30px;
+  padding-inline: 20px;
+  padding-bottom: 30px;
+  scroll-snap-type: inline mandatory;
+
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-primary-rgb), .75);
+    border: 2px solid var(--color-light);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-button {
+    width: 10%;
+  }
+}
+
+.table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  td,
+  th {
+    text-align: center;
+  }
+
+  tr:first-child {
+    border-top: 1px solid rgba(0,0,0,.08);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+  }
+  tr:last-child td {
+    border: none;
+    position: relative;
+    vertical-align: middle;
+    padding: 23px 0;
+  }
+
+  td {
+    position: relative;
+    vertical-align: top;
+    color: var(--color-primary);
+    font-weight: 700;
+
+    &:empty {
+      position: relative;
+
+      &:before {
+        position: absolute;
+        content: "";
+        top: calc(50% - 1px);
+        width: 25px;
+        height: 1px;
+        display: inline-block;
+        background: rgba(33, 33, 33, 0.65);
+      }
+    }
+
+    & > span {
+      width: 100% !important;
+      min-width: initial !important;
+    }
+
+    & > span > span {
+      all: unset;
+      display: block;
+      height: 35px !important;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      right: 0;
+      bottom: 0;
+      max-width: 60px;
+      max-height: 35px;
+      margin: auto;
+
+      display: block;
+    }
+  }
+
+  th {
+    padding: 23px 0;
+    color: rgba(20, 20, 20, .65);
+    font-weight: 700;
+  }
+}
+
+.separator {
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .button {
+    gap: 12px;
+  }
+
+  padding: 20px;
+}

@@ -7,6 +7,8 @@ const project: Project = {
   facades: 4,
   floors: 2,
 
+  storeys: 'masandra',
+
   isPopular: true,
   isSale: false,
 

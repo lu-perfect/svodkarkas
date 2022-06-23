@@ -1,36 +1,16 @@
-import config from "config";
-
 import Container from "components/UI/Container";
 
-import InternalLink from "components/UI/InternalLink";
-import Typography from "components/UI/Typography";
+import Brand from "./Brand";
+import Widgets from "./Widgets";
 
-import ContactsList from "./ContactsList";
-import Widget from "./Widget";
-
-import widgets from "./widgets.data";
-
+import styles from './styles.module.scss';
 
 const Footer = () => (
-  <footer className="footer">
-    <Container className="footer__container">
-      <div className="footer__brand">
-        <InternalLink href="/" className="footer__brand-logo">
-          {config.company.entity}
-        </InternalLink>
+  <footer className={styles.root}>
+    <Container className={styles.container}>
+      <Brand />
 
-        <Typography tag="p" className="footer__brand-tagline">
-          От проекта до дома вашей мечты.
-        </Typography>
-
-        <ContactsList />
-      </div>
-
-      <div className="footer__widgets">
-        {widgets.map((widget) => (
-          <Widget key={widget.title} {...widget} />
-        ))}
-      </div>
+      <Widgets />
     </Container>
   </footer>
 );

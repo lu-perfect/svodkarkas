@@ -1,4 +1,4 @@
-import { Price } from "utils/price.builder";
+import { FloorsVariant, Price } from "utils/price.builder";
 
 export function getProjectPrice(project: Project, _package: 1 | 2 | 3): number {
   return Price
@@ -9,7 +9,7 @@ export function getProjectPrice(project: Project, _package: 1 | 2 | 3): number {
     .setTerraceArea(project.area.terrace)
     .setOneFloorElementsArea(project.oneFloorElement?.area ?? 0)
     .setComplexWallsArea(project.complexWallsElement?.area ?? 0)
-    .setFloors(project.floors)
+    .setFloors(project.storeys || (project.floors as FloorsVariant))
     .hasComplexRoof(project.roof.isComplex ?? false)
     .build()
 }

@@ -1,44 +1,44 @@
-import Typography from "components/UI/Typography";
 import Button from "components/UI/Button";
-import Box from "components/UI/Box";
+
+import styles from './styles.module.scss';
 
 const OfferSection = () => (
-  <section id="offer">
-    <Box className="row">
-      <Box className="col">
-        <Typography tag="h3" className="h3">Карта построенных объектов</Typography>
-        <Typography tag="p" className="description">Мы строим в Москве и Московской области.</Typography>
+  <section id="offer" className={styles.root}>
+    <div className={styles.wrapper}>
+      <div className={styles.left}>
+        <h3>Карта построенных объектов</h3>
+        <p>Мы строим в Москве и Московской области.</p>
 
-        <Box className="map">
+        <div className={styles.map}>
           <iframe src="https://yandex.ru/map-widget/v1/-/CCUJZCrWSC" frameBorder={0} allowFullScreen />
-        </Box>
-      </Box>
+        </div>
+      </div>
 
-      <Box className="col">
-        <Typography tag="h3" className="h3">Заказать звонок</Typography>
-        <Typography tag="p" className="description">Заполните форму и мы свяжется с вами в ближайшее время.</Typography>
+      <div className={styles.right}>
+        <h3>Заказать звонок</h3>
+        <p>Заполните форму и мы свяжется с вами в ближайшее время.</p>
 
         <form>
-          <Box className="field">
-            <Typography tag="h3" className="h4">Ваше имя </Typography>
+          <div className={styles.field}>
+            <label>Ваше имя </label>
             <input type="text" placeholder="Иван Иванов" />
-          </Box>
-          <Box className="field">
-            <Typography tag="h3" className="h4">Телефон <i>*</i></Typography>
+          </div>
+          <div className={styles.field}>
+            <label>Телефон <i>*</i></label>
             <input type="text" placeholder="+7 (_ _ _) _ _ _-_ _-_ _" />
-          </Box>
+          </div>
 
-          <Button type="submit" variant="slider">
+          <Button type="submit" variant="slider" className={styles.button}>
             Заказать звонок
           </Button>
 
-          <small>
+          <small className={styles.agree}>
             * Нажимая на кнопку, вы даёте согласие на обработку ваших персональных данных в
             соответствии с <a target="_blank" href="/privacy">политикой конфиденциальности</a>
           </small>
         </form>
-      </Box>
-    </Box>
+      </div>
+    </div>
   </section>
 );
 export default OfferSection;

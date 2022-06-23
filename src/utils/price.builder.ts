@@ -1,5 +1,5 @@
-import { data } from "../data";
 import * as math from "mathjs";
+import prices from "../data/prices";
 
 export class Price {
   public static builder(): PriceBuilder {
@@ -15,7 +15,7 @@ export class PriceBuilder {
   private _area: number = 0;
   private _balconyArea: number = 0;
   private _terraceArea: number = 0;
-  private _oneFloorElementsArea: number = 0;
+  private _oneStoreyElementsArea: number = 0;
 
   private _floors: FloorsVariant = 1;
 
@@ -44,7 +44,7 @@ export class PriceBuilder {
     return this;
   }
   public setOneFloorElementsArea(area: number): PriceBuilder {
-    this._oneFloorElementsArea = area;
+    this._oneStoreyElementsArea = area;
 
     return this;
   }
@@ -67,71 +67,32 @@ export class PriceBuilder {
   }
 
   public build(): number {
-    const s0: number = math.subtract(this._area, math.add(this._oneFloorElementsArea, this._complexWallsArea)); // S элементов обычных.
-    const s1: number = this._complexWallsArea;     // S элементов со сложными стенами (эркер).
-    const s2: number = this._oneFloorElementsArea; // S элементов в 1 этаж (гараж).
+    const $E19 = this._area;
+    const $J19 = this._complexWallsArea;
+    const $H19 = this._oneStoreyElementsArea;
+    const $G19 = this._terraceArea;
+    const $B19 = this._floors;
+    const $F19 = this._balconyArea;
+    const $I19 = this._hasComplexRoof ? 1 : 0;
 
-    let fk: number = 1; // Коэффициент за этажность.
-    let rk: number = 1; // Коэффициент за крышу.
+    const $L$3 = prices.balconyPrice;
+    const $L$4 = prices.terracePrice;
 
-    switch (this._floors) {
-      case 1: fk = data.prices.oneStoryHouseCoefficient; break;
-      case 2: fk = data.prices.twoStoryHouseCoefficient; break;
-      case 'masandra': fk = 1; break;
-    }
+    const L$6: number = prices.price_per_meter[50_80][this._package - 1];
+    const L$7: number = prices.price_per_meter[80_120][this._package - 1];
+    const L$8: number = prices.price_per_meter[120_180][this._package - 1];
+    const L$9: number = prices.price_per_meter[180_220][this._package - 1];
+    const L$10: number = prices.price_per_meter[220_300][this._package - 1]
+    const L$11: number = prices.price_per_meter[300_450][this._package - 1];
 
-    if (this._hasComplexRoof) {
-      rk = data.prices.complexRoofCoefficient;
-    }
+    const $L$12 = prices.oneStoryHouseCoefficient;
+    const $L$13 = prices.twoStoryHouseCoefficient;
+    const $L$14 = prices.oneFloorElementsCoefficient;
+    const $L$15 = prices.complexRoofCoefficient;
+    const $L$16 = prices.complexWallsCoefficient;
 
-    let s: number = math.add(math.multiply((math.add(s0, math.multiply(s1, data.prices.complexWallsCoefficient))), fk), math.multiply(math.multiply(s2, data.prices.oneFloorElementsCoefficient), data.prices.oneStoryHouseCoefficient));
-
-    let m: number;
-
-    const p50_80: number = data.prices.price_per_meter[50_80][this._package - 1];
-    const p80_120: number = data.prices.price_per_meter[80_120][this._package - 1];
-    const p120_180: number = data.prices.price_per_meter[120_180][this._package - 1];
-    const p180_220: number = data.prices.price_per_meter[180_220][this._package - 1];
-    const p220_300: number = data.prices.price_per_meter[220_300][this._package - 1]
-    const p300_450: number = data.prices.price_per_meter[300_450][this._package - 1];
-
-    if (this._area < 80) {
-      m = math.multiply(p50_80, this._area);
-    } else if (this._area < 120) {
-      const diff = math.subtract(120, this._area);
-
-      const dx = math.divide(p80_120, math.subtract(120, 80));
-
-      m = math.add(p50_80, math.multiply(diff, dx));
-    } else if (this._area < 180) {
-      const diff = math.subtract(180, this._area);
-      const dx = math.divide(p120_180,  math.subtract(180, 120));
-
-      m = math.add(p80_120, math.multiply(diff, dx));
-    } else if (this._area < 220) {
-      const diff = math.subtract(220, this._area);
-      const dx = math.divide(p180_220, math.subtract(220, 180));
-
-      m = math.add(p120_180, math.multiply(diff, dx));
-    } else if (this._area < 300) {
-      const diff = math.subtract(300, this._area);
-      const dx = math.divide(p220_300, math.subtract(300, 220));
-
-      m = math.add(p180_220, math.multiply(diff, dx));
-    } else if (this._area < 450) {
-      const diff = math.subtract(450, this._area);
-      const dx = math.divide(p300_450, math.subtract(450, 300));
-
-      m = math.add(p220_300, math.multiply(diff, dx));
-    } else {
-      m = data.prices.price_per_meter[300_450][this._package - 1];
-    }
-    return math.round(math.add(
-      math.multiply(s, math.multiply(m, rk)),
-      math.add(
-        math.multiply(this._balconyArea, data.prices.balconyPrice),
-        math.multiply(this._terraceArea, data.prices.terracePrice)
-      )
-    ), 3);
+    return math.round(
+      ((($E19<80?L$6:($E19<120?L$6-($E19-80)*(L$6-L$7)/40:($E19<180?L$7-($E19-120)*(L$7-L$8)/60:($E19<220?L$8-($E19-180)*(L$8-L$9)/40:($E19<300?L$9-($E19-220)*(L$9-L$10)/80:($E19<450?L$10-($E19-300)*(L$9-L$10)/150:L$11)))))))*($E19+$J19*($L$16-1)+$H19*($L$14-1))+$G19*$L$4+$F19*$L$3)*($I19===0?1:$L$15)*($B19==1?$L$12:($B19==2?$L$13:1))
+    , 3);
   }
 }

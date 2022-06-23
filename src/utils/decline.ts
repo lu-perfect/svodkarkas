@@ -1,3 +1,4 @@
+// 'товар', 'товара', 'товаров'
 export function decline(value: number, words: Array<string>) {
   value = Math.abs(value) % 100;
   const num = value % 10;

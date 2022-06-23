@@ -4,7 +4,6 @@ export default function getProjectTags(project: Project): string[] {
       case "duplex": return 'Дуплекс';
       case "second-light": return 'Второй свет';
       default:
-        alert(tag);
         throw new Error('');
     }
   }) || [];

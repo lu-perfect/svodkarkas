@@ -1,0 +1,129 @@
+.root {
+  position: relative;
+
+  background-image: url("/images/pages/home/hero.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .25);
+    content: '';
+  }
+
+  height: calc(100vh - 147.8px);
+
+  @media (max-width: 992px) {
+    height: calc(100vh - 178.4px);
+  }
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 198.1px - 71.8px);
+  }
+
+  @media (max-width: 640px) {
+    height: calc(100vh - 187px - 71.8px);
+  }
+}
+
+// temp
+
+.lines {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  z-index: 3;
+  max-width: 1860px;
+  width: 100%;
+  height: 100%;
+  display: flex
+}
+
+@media only screen and (max-width:2000px) {
+  .lines {
+    max-width: 1760px
+  }
+}
+
+@media only screen and (max-width:1800px) {
+  .lines {
+    max-width: 1380px
+  }
+}
+
+@media only screen and (max-width:1500px) {
+  .lines {
+    max-width: 1200px
+  }
+}
+
+@media only screen and (max-width:1200px) {
+  .lines {
+    padding: 0 25px
+  }
+}
+
+.line {
+  position: relative;
+  width: 20%
+}
+
+.line:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, .4)
+}
+
+.step {
+  position: absolute;
+  left: 0;
+  bottom: 9.08%;
+  display: flex;
+  align-items: center;
+  padding-left: 25%;
+  width: 100%;
+  cursor: pointer;
+
+  &.active {
+    padding-left: 27%;
+
+    &:after {
+      left: 17.83%
+    }
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    background: #fff;
+    width: 28px;
+    height: 1px;
+    border-radius: 14px;
+    position: absolute;
+    left: 15.83%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    @media only screen and (max-width:1800px) {
+      width: 20px
+    }
+
+    @media only screen and (max-width:1200px) {
+        display: none
+    }
+  }
+
+  @media only screen and (max-width:1200px) {
+    padding-left: 40px
+  }
+
+  @media only screen and (max-width:1000px) {
+    padding: 0
+  }
+}

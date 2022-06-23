@@ -1,0 +1,250 @@
+.root {
+  position: relative;
+
+  border: 1px solid hsl(210, 100%, 97%);
+  background-color: white;
+  box-shadow: var(--shadow-2);
+
+  &:hover .banner img {
+    transform: scale(1.1);
+  }
+}
+.banner {
+  position: relative;
+  aspect-ratio: 2 / 1.5;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, hsla(0, 0%, 0%, .9), transparent 30%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease, opacity .4s ease-in-out;
+    opacity: 1;
+
+    &.transition {
+      opacity: 0;
+    }
+  }
+
+  a { height: 100%; }
+}
+
+.badges {
+  display: flex;
+  gap: 12px;
+
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.badge {
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--ff-secondary);
+  font-size: .75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .045em;
+  padding: 4px 10px;
+  border-radius: 8px 0;
+  box-shadow: var(--shadow-2);
+}
+
+.green { background: var(--color-yellow-green); }
+
+.orange { background: var(--color-secondary); }
+
+.styleBadge {
+  margin-left: auto;
+  background: hsl(0, 0, 29%);
+}
+
+.bannerActions {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px 10px;
+  z-index: 1;
+}
+
+.title {
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-family: var(--ff-secondary);
+  font-weight: 600;
+  color: #414042;
+
+  & > a:is(:hover, :focus) { color: var(--color-secondary); }
+}
+
+.content {
+  padding: 30px 15px 15px;
+
+  @media (min-width: 992px) {
+    padding-inline: 30px;
+  }
+}
+
+.text {
+  strong {
+    color: #141414;
+    font-weight: 600;
+  }
+
+  font-weight: 400;
+  color: #bababa;
+  font-size: .875rem;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.tableParams {
+  width: 100%;
+  margin-bottom: 16px;
+
+  & > div {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+
+    width: 100%;
+    white-space: nowrap;
+
+    span:first-child {
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      padding-right: 5px;
+      width: 100%;
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        height: 1px;
+        z-index: 0;
+        border-bottom: 1px dotted #333;
+      }
+    }
+  }
+}
+
+.price {
+  color: var(--color-secondary);
+  font-family: var(--ff-secondary);
+  font-size: .875rem;
+  margin-bottom: 5px;
+
+  strong {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls {
+  display: flex;
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  background: var(--color-white);
+  z-index: 1;
+  transform: translateZ(0);
+  box-shadow: var(--shadow-1);
+
+  button {
+    position: absolute;
+    background: var(--color-white);
+    transition: background .45s;
+    cursor: pointer;
+    z-index: 5;
+    width: 50%;
+    height: 100%;
+    top: 0;
+
+    span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 8px;
+      height: 2px;
+      background: #121212;
+      z-index: 2;
+      transition: all .3s;
+
+      @media screen and (min-width: 640px) {
+        width: 10px;
+      }
+    }
+
+    &:first-child { left: 0; }
+    &:last-child  { right: 0; }
+
+    &:disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+    &:not(:disabled):hover {
+      background-color: #ebebe5;
+    }
+  }
+
+  button:disabled span:nth-child(1),
+  button:disabled span:nth-child(2) {
+    transform: rotate(0) scaleX(2) translateX(-30%);
+  }
+
+  button.next:disabled span:nth-child(1),
+  button.next:disabled span:nth-child(2) {
+    transform: rotate(0) scaleX(2) translateX(30%);
+  }
+
+  button span:nth-child(1) { transform: rotate(-45deg) }
+  button span:nth-child(2) { transform: rotate(45deg) }
+
+  button.prev span { transform-origin: 0 50%; left: 2px; }
+  button.next span { transform-origin: 100% 50%; right: 2px; }
+
+  button.next span:nth-child(1),
+  button.prev span:nth-child(2) {
+    top: -1px;
+  }
+
+  button.next span:nth-child(2),
+  button.prev span:nth-child(1) {
+    top: 1px;
+  }
+
+  button.next:disabled span:nth-child(1),
+  button.prev:disabled span:nth-child(1) {
+    top: 0;
+  }
+
+  button.next:disabled span:nth-child(2),
+  button.prev:disabled span:nth-child(2) {
+    top: 0;
+  }
+}

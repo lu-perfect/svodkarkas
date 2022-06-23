@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { useState } from "react";
 
-import Box from "components/UI/Box";
-
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -16,17 +14,13 @@ const Layout = ({ children }: PropsWithChildren<{}>) => {
   }
 
   return (
-    <Box
-      id="layout"
-      onWheel={handleScroll}
-      onScroll={handleScroll}
-    >
+    <div onWheel={handleScroll} onScroll={handleScroll}>
       <Header isFixed={fixedHeader} />
       <main>
         {children}
       </main>
       <Footer />
-    </Box>
+    </div>
   );
 }
 

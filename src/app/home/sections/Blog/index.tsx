@@ -1,26 +1,25 @@
-import Typography from "components/UI/Typography";
 import Container from "components/UI/Container";
-import ListItem from "components/UI/ListItem";
-import List from "components/UI/List";
 
 import BlogCard from "./Card";
 
 import articles from "./articles.data";
 
+import styles from './styles.module.scss';
+
 const BlogSection = () => (
-  <section id="blog">
+  <section id="blog" className={styles.root}>
     <Container>
-      <Typography tag="p" className="subtitle">Блог</Typography>
+      <p className="subtitle">Блог</p>
 
-      <Typography tag="h2" className="h2 title">Последние новости</Typography>
+      <h2 className="title">Последние новости</h2>
 
-      <List className="blog-list">
+      <ul className={styles.wrapper}>
         {articles.map((article) => (
-          <ListItem key={article.id}>
+          <li key={article.id}>
             <BlogCard {...article} />
-          </ListItem>
+          </li>
         ))}
-      </List>
+      </ul>
     </Container>
   </section>
 );

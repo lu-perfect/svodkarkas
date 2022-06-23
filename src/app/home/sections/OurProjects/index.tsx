@@ -1,33 +1,33 @@
 import Container from "components/UI/Container";
-import Typography from "components/UI/Typography";
-import ListItem from "components/UI/ListItem";
-import List from "components/UI/List";
 
-import ProjectCard from "app/projects/ProjectCard";
-import AdvancedSearch from "components/AdvancedSearch";
+import ProjectCard from "app/projects/components/ProjectCard";
+
+import AdvancedSearch from "app/projects/components/AdvancedSearch";
+
+import styles from './styles.module.scss';
 
 const OurProjectsSection = ({ projects } : { projects: Array<Project> }) => (
-  <section id="our-projects">
+  <section id="our-projects" className={styles.root}>
     <Container>
-      <Typography tag="p" className="subtitle">
+      <p className="subtitle">
         Каркас
-      </Typography>
+      </p>
 
-      <Typography tag="h2" className="h2 title">
+      <h2 className="title">
         Наши проекты
-      </Typography>
+      </h2>
 
-      <Container className="important">
+      <Container className={styles.filtersWrapper}>
         <AdvancedSearch />
       </Container>
 
-      <List className="has-scrollbar">
+      <ul className={styles.projects}>
         {projects.map((project) => (
-          <ListItem key={project.id}>
+          <li key={project.id}>
             <ProjectCard project={project} />
-          </ListItem>
+          </li>
         ))}
-      </List>
+      </ul>
     </Container>
   </section>
 );

@@ -1,0 +1,28 @@
+.root {
+  background: var(--color-white);
+  position: fixed;
+  top: 0;
+  left: -310px;
+  max-width: 300px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 3px 10px hsla(0, 0%, 0%, 0.3);
+  z-index: 5;
+  padding: 60px 20px;
+  visibility: hidden;
+  transition: 0.15s ease-in;
+
+  @media (min-width: 1200px) {
+    all: unset;
+  }
+}
+
+.active {
+  visibility: visible;
+  transform: translateX(310px);
+  transition: 0.25s ease-out;
+
+  @media (min-width: 1200px) {
+    all: unset;
+  }
+}

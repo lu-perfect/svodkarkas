@@ -1,0 +1,19 @@
+.root {
+  background: var(--color-light);
+  padding-block: var(--section-padding);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+
+  li {
+    width: calc(100% / 3 - 20px);
+
+    @media (max-width: 992px) {
+      width: 100%;
+    }
+  }
+}

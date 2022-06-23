@@ -1,0 +1,79 @@
+.root {
+  padding-block: var(--section-padding);
+}
+
+.container:not(.filtersWrapper) {
+  @media (min-width: 600px) {
+    max-width: unset;
+    padding-inline: 25px;
+  }
+}
+
+.title {
+  @media (max-width: 992px) {
+    --margin-bottom: 24px;
+  }
+}
+
+.projects {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  overflow-x: auto;
+  margin-inline: -15px;
+  padding-inline: 15px;
+  scroll-padding-left: 15px;
+  padding-bottom: 60px;
+  scroll-snap-type: inline mandatory;
+
+  & > li {
+    min-width: 100%;
+    scroll-snap-align: start;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+
+    @media (max-width: 768px) {
+      width: 24px;
+      height: 12px;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    outline: 1.5px solid var(--color-primary);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-primary-rgb), .75);
+    border: 2px solid #ededed;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-button {
+    width: 15%;
+
+    @media (max-width: 768px) {
+      width: 5%;
+    }
+  }
+
+  @media (min-width: 600px) {
+    gap: 25px;
+    margin-inline: -25px;
+    padding-inline: 25px;
+    scroll-padding-left: 25px;
+
+    & > li {
+      min-width: calc(50% - 12.5px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    & > li {
+      min-width: calc(33.33% - 16.66px);
+    }
+  }
+}

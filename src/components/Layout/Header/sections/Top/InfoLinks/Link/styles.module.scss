@@ -1,0 +1,28 @@
+.root {
+  svg {
+    color: var(--color-primary);
+    font-size: 15px;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--color-white);
+
+    &:is(:hover, :focus) {
+      color: var(--color-primary);
+    }
+
+    gap: 10px;
+  }
+}
+
+.caption {
+  font-style: normal;
+  line-height: 1.5;
+
+  font-size: .75rem;
+  font-weight: 700;
+}

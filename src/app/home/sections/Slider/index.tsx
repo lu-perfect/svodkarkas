@@ -1,22 +1,25 @@
+import Image from "next/image";
+
 import { useRouter } from "next/router";
 
-import Carousel from "components/Carousel";
+import Carousel from "app/home/sections/Slider/Carousel";
 
-import Typography from "components/UI/Typography";
 import Container from "components/UI/Container";
 import Button from "components/UI/Button";
-import Box from "components/UI/Box";
+
 import { Gallery, Item } from "react-photoswipe-gallery";
+
+import styles from './styles.module.scss'
 
 const SliderSection = ({ images } : { images: Array<Array<string>> }) => {
   const router = useRouter();
 
   return (
-    <section id="gallery">
+    <section id="gallery" className={styles.root}>
       <Container>
-        <Typography tag="h2" className="h2 title">
+        <h2 className="title">
           Построенные дома
-        </Typography>
+        </h2>
 
         <Carousel>
           <Gallery>
@@ -28,28 +31,28 @@ const SliderSection = ({ images } : { images: Array<Array<string>> }) => {
                 height={768}
               >
                 {({ ref, open }) => (
-                  <Box>
-                    <img
+                  <div ref={ref as any}>
+                    <Image
                       width={1024} height={768}
-                      ref={ref as any}
                       role="button"
                       tabIndex={-1}
+                      loading="eager"
+                      priority
                       alt={e[0]}
-                      loading="lazy"
                       onClick={open}
                       src={e[0]} />
-                  </Box>
+                  </div>
                 )}
               </Item>
             ))}
           </Gallery>
         </Carousel>
 
-        <Box className="button-wrapper">
+        <div className={styles.buttonWrapper}>
           <Button variant="slider" onClick={() => router.push('/gallery')}>
             Все фото
           </Button>
-        </Box>
+        </div>
       </Container>
     </section>
   );

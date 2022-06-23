@@ -1,0 +1,83 @@
+.button {
+  position: relative;
+  font-family: var(--ff-secondary);
+  font-size: .875rem;
+  text-transform: capitalize;
+
+  cursor: pointer;
+
+  letter-spacing: 0.045em;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.slider {
+  position: relative;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 1px solid var(--color-primary);
+  padding: 10px 20px;
+  z-index: 1;
+  border-radius: 10px 0;
+  font-weight: 700;
+
+  &:is(:hover, :focus) {
+    background: var(--color-black);
+    color: var(--color-dark);
+    border-color: var(--color-black);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--color-white);
+    transition: width var(--transition);
+    border-radius: 10px 0;
+    z-index: -1;
+  }
+
+  &:is(:hover, :focus)::before { width: 100%; }
+
+  @media (min-width: 992px) {
+    padding: 15px 40px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 12px 28px;
+  }
+}
+
+.outline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: .875rem;
+  border: 2px solid var(--color-primary);
+  padding: 10px 20px;
+  z-index: 1;
+  border-radius: 10px 0;
+  font-weight: 700;
+
+  &:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  @media (min-width: 992px) {
+    padding: 15px 40px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 12px 28px;
+  }
+}

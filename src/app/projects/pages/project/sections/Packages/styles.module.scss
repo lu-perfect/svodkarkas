@@ -1,0 +1,16 @@
+.root {
+  padding-block: 60px;
+  padding-block-start: 30px;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, calc(100% / 3));
+  grid-auto-rows: auto;
+  grid-gap: 16px;
+}

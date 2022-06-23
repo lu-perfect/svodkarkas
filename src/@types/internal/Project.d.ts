@@ -1,5 +1,7 @@
 import type { Tag } from "./Tag";
 import type { FloorsVariant } from "utils/price.builder";
+import {Slides} from "../../app/projects/pages/project/sections/Packages";
+import {Property} from "csstype";
 
 declare global {
   type Project = {
@@ -11,6 +13,8 @@ declare global {
     facades: number;
 
     floors: FloorsVariant;
+
+    storeys?: FloorsVariant;
 
     isPopular?: boolean;
     isSale?: boolean;
@@ -51,5 +55,18 @@ declare global {
     bedrooms: number;
     bathrooms: number;
   }
+
+  type Slide = {
+    title: string;
+    url: string;
+    objectFit?: Property.ObjectFit;
+  };
+
+  type ProjectViewDTO = Project & { prices: Array<number>, minPrice: string, terraceAndBalconyArea: string, slides: {
+      covers: Array<Slide>,
+      facades: Array<Slide>,
+      plans: Array<Slide>,
+    }
+  };
 }
 export {}

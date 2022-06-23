@@ -1,0 +1,15 @@
+.root {
+  position: relative;
+  padding-block: var(--section-padding);
+
+  @media (max-width: 992px) {
+    padding-block: 0;
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 30px;
+}

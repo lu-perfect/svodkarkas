@@ -1,15 +1,20 @@
+import {AnchorHTMLAttributes, DetailedHTMLProps, ForwardedRef, useRef} from "react";
+
 import NextLink from "next/link";
 
-import type { PropsWithChildren } from "react";
+export type InternalLinkProps = Omit<DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, 'href'> & {
+  href: string;
+};
 
-import type { LinkProps } from "./Link";
-import Link from "./Link";
+export const InternalLink = ({ children, href, ...rest }: InternalLinkProps) => {
+  const ref = useRef<HTMLAnchorElement>(null);
 
-export const InternalLink = ({ children, ...props }: PropsWithChildren<LinkProps>) => (
-  <NextLink href={props.href}>
-    <Link {...props}>
-      {children}
-    </Link>
-  </NextLink>
-);
+  return (
+    <NextLink href={href}>
+      <a {...rest} href={href} ref={ref}>
+        {children}
+      </a>
+    </NextLink>
+  );
+}
 export default InternalLink;

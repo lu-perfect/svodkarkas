@@ -1,0 +1,7 @@
+.root {
+  @media (min-width: 1200px) {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+}

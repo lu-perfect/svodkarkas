@@ -1,0 +1,43 @@
+.root {
+  padding-block-start: 30px;
+  padding-block-end: 60px;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+}
+
+.grid {
+  column-count: 3;
+  column-gap: 10px;
+
+  @media (max-width: 992px) {
+    column-count: 2;
+  }
+
+  @media (max-width: 768px) {
+    column-count: 1;
+  }
+}
+
+.item {
+  cursor: pointer;
+
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin: 0 0 10px;
+  break-inside: avoid;
+
+  position: relative;
+  z-index: 1;
+  width: 100%;
+
+  img {
+    grid-row: 1 / -1;
+    grid-column: 1;
+    display: block;
+    object-fit: cover;
+    overflow: hidden;
+  }
+}

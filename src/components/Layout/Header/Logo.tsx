@@ -1,7 +1,7 @@
 import Icon from "components/UI/Icon";
 
 const Logo = () => (
-  <Icon width={230} height={56} viewBox="0 0 2711 633" fill="none">
+  <Icon width={230} height={56} viewBox="0 0 2711 633" fill="none" className="logo">
     <g clipPath="url(#header_logo_clip)">
       <path d="M613.901 222.212L413.594 1.01953L-5.00097 459.713L-6 658.48H117.88V553.49L347.158 302.228L446.063 406.199L613.901 222.212Z" fill="black" stroke="black"/>
       <path d="M1026 657.969V489.272L743.274 182.457L491.018 455.634L579.932 559.605V657.969H1026Z" fill="#79B26B" stroke="#79B26B"/>

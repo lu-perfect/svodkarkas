@@ -1,8 +1,6 @@
-const { company } = require("./src/config");
-
 /** @type {import('next-sitemap').IConfig} */
 const NextSitemapConfig = {
-  siteUrl: company.url,
+  siteUrl: process.env.DOMAIN_FRONTEND,
   generateRobotsTxt: true,
 };
 

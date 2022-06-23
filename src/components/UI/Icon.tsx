@@ -1,27 +1,25 @@
-import type { PropsWithChildren } from "react";
-import {CSSProperties} from "react";
+import type { SVGProps } from "react";
 
-type IconProps = {
-  viewBox: string;
+export type IconProps = SVGProps<SVGSVGElement>;
 
-  className?: string;
-  style?: CSSProperties;
-
-  fill?: string;
-  stroke?: string;
-
-  width?: string | number;
-  height?: string | number;
-}
-
-export const Icon = ({ children, viewBox, className, style, fill = 'currentColor', stroke, width = '1em', height = '1em' } : PropsWithChildren<IconProps>) => (
+export const Icon = ({
+  children,
+  viewBox,
+  className,
+  fill = 'currentColor',
+  'aria-hidden': ariaHidden = true,
+  focusable = false,
+  width = '1em', height = '1em',
+  ...rest
+} : IconProps) => (
   <svg
+    {...rest}
     className={`icon${className ? ` ${className}` : ''}`} viewBox={viewBox}
     width={width} height={height}
     fill={fill}
-    style={style}
-    stroke={stroke}
-    aria-hidden="true" focusable="false">
+    aria-hidden={ariaHidden}
+    focusable={focusable}
+  >
     {children}
   </svg>
 );

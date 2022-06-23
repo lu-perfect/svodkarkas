@@ -1,0 +1,120 @@
+%link {
+  font-size: .875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding-block: 15px;
+
+  @media (min-width: 1200px) {
+    font-size: 1.125rem;
+    text-transform: capitalize;
+  }
+}
+
+.root {
+  span {
+    @extend %link;
+
+    color: var(--color-primary);
+  }
+
+  a {
+    @extend %link;
+
+    color: var(--color-dark);
+
+    &:is(:hover, :focus) {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  svg {
+    margin-top: 3.5px;
+    font-size: 20px;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 0;
+  }
+
+  ul {
+    display: none;
+    opacity: 0;
+
+    border-radius: 25px 0;
+    overflow: hidden;
+
+    box-shadow: 0 16px 32px hsla(188, 63%, 7%, .1);
+
+    transition: all var(--transition);
+    position: absolute;
+    top: 48px;
+    left: -50%;
+
+    @media (max-width: 1200px) {
+      position: initial;
+      visibility: visible;
+      opacity: 1;
+      display: block;
+      text-align: left;
+      left: 0;
+    }
+
+    & > li > a {
+      padding: 12px 24px;
+      white-space: nowrap;
+
+      @media (max-width: 1200px) {
+        padding: 0;
+        padding-block: 15px;
+      }
+    }
+
+    li {
+      clear: both;
+      width: 100%;
+      text-align: left;
+      transition: all var(--transition);
+
+      @media (max-width: 1200px) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &:hover > ul {
+    opacity: 1;
+    display: block;
+    text-align: left;
+    background: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+
+    svg {
+      margin-top: .5px;
+      transform: rotate(-180deg);
+    }
+  }
+
+  svg {
+    transition: transform .3s linear, margin-top .3s linear;
+  }
+}

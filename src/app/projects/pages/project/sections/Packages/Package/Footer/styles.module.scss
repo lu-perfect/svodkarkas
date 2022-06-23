@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 16px;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-2);
+
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+
+  border-top: 2px dashed var(--color-primary);
+}
+
+.button {
+  padding: 6px 12px;
+}
+
+.price {
+  color: var(--color-secondary);
+  font-weight: 500;
+  font-size: 18px;
+  font-family: var(--ff-secondary);
+}

@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 30px;
+
+  @media (max-width: 992px) {
+    gap: 15px;
+  }
+}

@@ -1,38 +1,30 @@
-import { useEffect, useRef } from "react";
-
-import Box from "components/UI/Box";
+import { useState } from "react";
 
 import TopSection from "./sections/Top";
 import BottomSection from "./sections/Bottom";
 
-const Header = () => {
-  const ref = useRef<HTMLElement>(null);
+import styles from './styles.module.scss';
 
-  function handleScroll() {
-    if (window.scrollY >= 400) {
-      ref.current?.classList.add("active");
-    } else {
-      ref.current?.classList.remove("active");
-    }
+export type HeaderProps = {
+  isFixed: boolean;
+}
+
+function Header({ isFixed } : HeaderProps) {
+  const [menu, setMenu] = useState(false);
+
+  function toggleMenu() {
+    setMenu(!menu);
   }
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [])
-
   return (
-    <header className="header" ref={ref}>
-      <Box className="overlay" />
+    <header className={styles.root}>
+      <div className={`${styles.overlay}${menu ? ` ${styles.active}` : ''}`} />
 
       <TopSection />
 
-      <BottomSection />
+      <BottomSection isFixed={isFixed} toggleMenu={toggleMenu} menu={menu} />
     </header>
   );
-};
+}
 
 export default Header;

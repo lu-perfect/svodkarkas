@@ -1,0 +1,19 @@
+.root {
+  background: var(--color-white);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-block: 15px 10px;
+  box-shadow: -2px 0 30px hsla(237, 71%, 52%, 0.2);
+  z-index: 3;
+
+  @media (min-width: 768px) {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}

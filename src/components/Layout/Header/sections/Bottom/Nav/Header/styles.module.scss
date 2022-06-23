@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--color-light);
+  margin-bottom: 25px;
+
+  .logo svg {
+    width: 200px;
+  }
+
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}

@@ -1,0 +1,132 @@
+.root {
+  display: flex;
+
+  flex-direction: column;
+  gap: 12px;
+
+  span {
+    display: block;
+  }
+
+  &.w-24 {
+    width: calc(25% - 20px);
+
+    @media (max-width: 992px) {
+      width: 100%;
+    }
+  }
+
+  &.w-12 {
+    width: calc(25% / 2 - 20px);
+
+    @media (max-width: 992px) {
+      width: calc(50% - 12.5px);
+    }
+  }
+}
+
+.select {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+
+  color: var(--color-black);
+  transition: all var(--transition);
+
+  box-shadow: var(--shadow-2);
+  border-radius: 12px 0;
+
+  background-color: var(--color-white);
+
+  fieldset {
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    display: flex;
+
+    &:focus {
+      & + .options {
+        opacity: 1;
+
+        animation-name: none;
+
+        .option {
+          cursor: pointer;
+        }
+      }
+
+      svg {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+  }
+
+  &:focus-within {
+    border-radius: 0;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+  }
+
+  input {
+    display: none;
+  }
+
+  span {
+    font-family: var(--ff-secondary);
+    width: 100%;
+    margin: 0;
+    padding: 12px 18px;
+  }
+
+  .options {
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+
+    animation-name: HideList;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: step-start;
+    border-radius: 15px 0;
+    box-shadow: var(--shadow-2);
+  }
+
+  .option {
+    display: block;
+    padding: 15px;
+    font-family: var(--ff-secondary);
+    background-color: var(--color-white);
+
+    &:hover,
+    &:focus,
+    &.active {
+      color: hsl(109, 31%, 30%);
+      background-color: hsl(109, 31%, 90%);
+    }
+  }
+}
+
+@keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}

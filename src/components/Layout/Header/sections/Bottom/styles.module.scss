@@ -1,0 +1,44 @@
+.root {
+  background: var(--color-white);
+  padding-block: 25px;
+
+  .logo {
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1200px) {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.fixed {
+  @media (min-width: 1200px) {
+    position: fixed;
+    bottom: auto;
+    top: -101.6px;
+    padding-block: 20px;
+    box-shadow: 0 10px 50px hsla(109, 31%, 56%, 0.1);
+    animation: slideDown 0.25s ease-out forwards;
+  }
+}
+
+.container {
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+

@@ -1,8 +1,8 @@
 declare global {
   type Paragraph = {
     id: number | string;
-    content?: string;
-    isEmpty?: true;
+    content: string;
+    dots: Array<boolean>;
   }
 }
 export {}

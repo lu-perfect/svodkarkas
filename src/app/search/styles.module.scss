@@ -1,0 +1,121 @@
+.root {
+  padding-block-start: 30px;
+  padding-block-end: 60px;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+}
+
+.searchWrapper {
+  position: relative;
+  margin-bottom: 24px;
+
+  input {
+    width: 100%;
+    height: 100%;
+    line-height: 1.2;
+    background-color: #eff0f0;
+    transition: all 0.2s ease;
+    padding: 0.5625rem 0.75rem 0.5625rem 46px;
+    border-radius: 0.25em;
+    box-shadow: inset 0 0 0 1px #d6d7d7;
+    border: 1px solid #d6d7d7;
+    appearance: none;
+    font-size: 1.125rem;
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+
+    &:focus {
+      background-color: var(--color-white);
+
+      color: var(--color-primary--dark);
+
+      border: 1px solid var(--color-primary);
+
+      &::-webkit-search-cancel-button {
+        height: 24px;
+        width: 24px;
+
+        margin-left: .4em;
+
+        cursor: pointer;
+
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nIzc5YjI2Yyc+PHBhdGggZD0nTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnonLz48L3N2Zz4=");
+      }
+
+      & ~ button {
+        svg {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+
+  button {
+    left: 0;
+    right: auto;
+    pointer-events: none;
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: inherit;
+    line-height: inherit;
+    appearance: none;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 46px;
+
+    svg {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      color: hsl(210, 2%, 64%);
+      transition: .2s;
+      line-height: 1;
+      flex-shrink: 0;
+      max-width: initial;
+    }
+  }
+}
+
+.results {
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.category {
+
+  ul {
+    padding-top: 12px;
+    margin-bottom: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  p {
+    padding-top: 12px;
+    color: hsl(204, 2%, 46%);
+
+    a {
+      font-weight: 600;
+      color: var(--color-primary);
+
+      display: inline-block;
+    }
+  }
+
+}

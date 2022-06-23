@@ -1,0 +1,97 @@
+.root {
+  margin-bottom: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 25px;
+}
+
+.bottomFilters {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 30px;
+
+  padding-top: 15px;
+  padding-bottom: 10px;
+
+  .sortButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    svg {
+      transition: all var(--transition);
+      opacity: 0;
+      color: var(--color-primary);
+
+      transform: rotate(90deg);
+
+      &.asc {
+        transform: rotate(0);
+        opacity: 1;
+      }
+      &.desc {
+        transform: rotate(180deg);
+        opacity: 1;
+      }
+    }
+  }
+
+  button {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .showMoreButton {
+    margin-left: auto;
+
+    border-bottom: 2px dashed var(--color-primary);
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: flex-end;
+
+  width: calc(25% - 20px);
+  @media (max-width: 992px) {
+    width: 100%;
+  }
+
+  button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: .875rem;
+    font-weight: 700;
+
+    line-height: 1;
+    height: 44.7px;
+
+    padding: 12px 18px;
+
+    text-align: center;
+    width: 100%;
+
+    border-radius: 8px 0;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 75%;
+      margin: 0 auto;
+    }
+
+    &:is(:hover, :focus) {
+      background: var(--color-primary);
+    }
+
+    &:before {
+      content: none;
+    }
+  }
+}

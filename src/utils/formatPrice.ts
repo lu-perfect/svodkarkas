@@ -6,3 +6,4 @@ export function formatPrice(price: number): string {
     currency: 'RUB',
   });
 }
+export default formatPrice;

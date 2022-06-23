@@ -1,0 +1,17 @@
+.root {
+  font-size: 1rem;
+
+  @media (max-width: 992px) {
+    font-size: 15px;
+  }
+
+  &:is(:hover, :focus) {
+    svg {
+      color: var(--color-white);
+    }
+  }
+
+  a {
+    color: rgba(255, 255, 255, .65);
+  }
+}

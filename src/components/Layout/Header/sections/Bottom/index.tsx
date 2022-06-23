@@ -5,16 +5,24 @@ import Logo from "../../Logo";
 import Nav from "./Nav";
 import Actions from "./Actions";
 
-const BottomSection = () => (
-  <section className="header_bottom">
-    <Container>
+import styles from './styles.module.scss';
+
+export type BottomSectionProps = {
+  isFixed: boolean;
+  menu: boolean;
+  toggleMenu: () => void;
+}
+
+const BottomSection = ({ isFixed, menu, toggleMenu } : BottomSectionProps) => (
+  <section className={`${styles.root}${isFixed ? ` ${styles.fixed}` : ''}`}>
+    <Container className={styles.container}>
       <InternalLink href="/">
-        <Logo />
+        <Logo/>
       </InternalLink>
 
-      <Nav />
+      <Nav menu={menu} toggleMenu={toggleMenu}/>
 
-      <Actions />
+      <Actions menu={menu} toggleMenu={toggleMenu}/>
     </Container>
   </section>
 );

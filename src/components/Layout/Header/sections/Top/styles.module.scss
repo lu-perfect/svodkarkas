@@ -1,0 +1,61 @@
+.root {
+  background: var(--color-dark);
+  padding-block: 8px;
+
+  @media (max-width: 768px) {
+    padding-block: 15px;
+  }
+}
+
+.button {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: .75rem !important;
+  font-weight: 700;
+  border-radius: 8px 0;
+  border: none;
+  padding: 6px 16px;
+
+  @media (max-width: 992px) {
+    padding: 4px 12px;
+  }
+
+  &:is(:hover, :focus) {
+    background: var(--color-primary--dark);
+  }
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px 20px;
+
+  @media (max-width: 768px) {
+    row-gap: 20px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
+
+  gap: 30px;
+
+  @media (max-width: 992px) {
+    margin-left: 0;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    gap: 30px;
+  }
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}

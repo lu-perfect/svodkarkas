@@ -1,0 +1,32 @@
+.root {
+  padding-block: 60px;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+
+  &:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .button {
+      gap: 12px;
+    }
+
+    padding: 20px;
+  }
+  &:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    position: relative;
+    padding: 40px 20px;
+  }
+}
+
+.separator {
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}

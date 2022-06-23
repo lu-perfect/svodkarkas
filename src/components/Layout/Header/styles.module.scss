@@ -1,0 +1,31 @@
+.root {
+  position: relative;
+  z-index: 2000;
+  padding-bottom: 106px;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1200px) {
+    padding-bottom: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+  z-index: 4;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  @media (min-width: 1200px)  {
+    display: none;
+  }
+}
+

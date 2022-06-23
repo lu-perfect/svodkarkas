@@ -1,0 +1,23 @@
+.root {
+  padding-block: var(--section-padding);
+  background: var(--color-light);
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+
+  li {
+    width: calc(100% / 3 - 15px);
+
+    @media (max-width: 992px) {
+      max-width: 400px;
+      width: 100%;
+
+      margin: 0 auto;
+    }
+  }
+}
+

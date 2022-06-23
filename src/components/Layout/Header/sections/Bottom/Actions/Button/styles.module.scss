@@ -1,0 +1,49 @@
+.root {
+  cursor: pointer;
+
+  svg {
+    color: rgb(26, 26, 26);
+    font-size: 20px;
+    margin-inline: auto;
+    margin-bottom: 5px;
+    transition: color var(--transition);
+
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+    }
+
+    &:is(:hover, :focus) {
+      color: var(--color-primary);
+    }
+  }
+
+  span {
+    color: var(--color-dark);
+    font-family: var(--ff-secondary);
+    font-size: .75rem;
+    font-weight: 500;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    background: var(--color-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-2);
+
+    &:hover {
+      box-shadow: (--shadow-1);
+    }
+  }
+}
+
+.menu {
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}
+

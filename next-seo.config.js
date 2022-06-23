@@ -1,26 +1,31 @@
-import { company } from "./src/config";
+const title = ''; // SITE_NAME
+const description = ''; // SITE_DESCRIPTION
+
+const twitterHandle = ''; // SEO_TWITTER_HANDLE
+
+const url = ''; // DOMAIN_FRONTEND
 
 /** @type {import('next-seo').DefaultSeoProps} */
 const seoConfig = {
-  title: company.title,
-  titleTemplate: `%s | ${company.title}`,
-  defaultTitle: company.title,
-  description: company.description,
-  canonical: company.url,
+  title,
+  titleTemplate: `%s | ${title}`,
+  defaultTitle: title,
+  description,
+  canonical: url,
   openGraph: {
-    url: company.url,
-    title: company.title,
-    description: company.description,
+    url,
+    title,
+    description,
     images: [
       {
-        url: company.url,
-        alt:`${company.url} og-image`,
+        url,
+        alt:`${url} og-image`,
       },
     ],
-    site_name: company.title,
+    site_name: title,
   },
   twitter: {
-    handle: "@svod",
+    handle: `@${twitterHandle}`,
     cardType: "summary_large_image",
   },
 };

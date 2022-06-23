@@ -1,0 +1,43 @@
+.root {
+  figure {
+    cursor: zoom-in;
+    position: relative;
+    min-height: 450px;
+    height: 100%;
+
+    img {
+      object-fit: contain;
+
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.one-storey {
+
+}
+
+.two-storey {
+  .plan {
+    width: 50%;
+  }
+
+  .facade {
+    min-height: 250px !important;
+    height: 250px !important;
+    width: 25%;
+  }
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background-color: white;
+  max-width: 1920px;
+  margin: 0 20px 24px;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 14px;
+}
